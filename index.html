@@ -1048,21 +1048,67 @@
             </div>
 
             <div class="form-group">
-                <label for="service">Service Interested In *</label>
-                <select id="service" name="service" required>
-                    <option value="">Select a service...</option>
-                    <option value="dashboard">Dashboard & Automation</option>
-                    <option value="website">Website Development</option>
-                    <option value="marketing">Digital Marketing (SEO & Content)</option>
-                    <option value="multiple">Multiple Services</option>
-                    <option value="other">Not Sure / Other</option>
-                </select>
-            </div>
+    <label for="service" style="display:block; margin-bottom:0.5rem; font-weight:600;">Service Interested In *</label>
+    <select id="service" name="service" required>
+        <option value="">Select a service...</option>
+        <option value="dashboard">Dashboard & Automation</option>
+        <option value="website">Website Development</option>
+        <option value="marketing">Digital Marketing (SEO & Content)</option>
+        <option value="multiple">Multiple Services</option>
+        <option value="other">Not Sure / Other</option>
+    </select>
+</div>
 
-            <div class="form-group">
-                <label for="message">Project Details</label>
-                <textarea id="message" name="message" placeholder="Tell us about your project, timeline, and any specific requirements..."></textarea>
-            </div>
+<style>
+/* === Dark Modern Select === */
+select#service {
+    background-color: rgba(26, 26, 36, 0.9);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    background-image: url('data:image/svg+xml,%3Csvg fill="%23ffffff" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M7 10l5 5 5-5z"/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px;
+    margin-bottom: 1rem;
+}
+
+/* Hover & Focus */
+select#service:hover,
+select#service:focus {
+    border-color: #ff5c57; /* accent color */
+    background-color: rgba(26, 26, 36, 1);
+    outline: none;
+}
+
+/* Option Styling */
+select#service option {
+    background-color: rgba(26, 26, 36, 0.95);
+    color: #ffffff;
+    padding: 0.5rem;
+}
+
+/* Scrollbar Styling (Webkit) */
+select#service::-webkit-scrollbar {
+    width: 8px;
+}
+select#service::-webkit-scrollbar-thumb {
+    background: #ff5c57;
+    border-radius: 4px;
+}
+select#service::-webkit-scrollbar-track {
+    background: rgba(26, 26, 36, 0.5);
+}
+</style>
 
             <!-- Fake submit button that triggers modal/alert -->
             <button type="submit" class="btn btn-primary" style="width: 100%;">Get Started</button>
@@ -1267,6 +1313,7 @@
 
 </body>
 </html>
+
 
 
 
