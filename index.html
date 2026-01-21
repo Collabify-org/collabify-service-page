@@ -1140,19 +1140,7 @@
         // Initial check
         checkServiceSlides();
 
-        // Sticky CTA
-        const stickyCta = document.getElementById('stickyCta');
-        const heroSection = document.querySelector('.hero');
-
-        window.addEventListener('scroll', () => {
-            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-            if (window.scrollY > heroBottom) {
-                stickyCta.classList.add('visible');
-            } else {
-                stickyCta.classList.remove('visible');
-            }
-        });
-
+        
         // Form submission
         document.querySelector('.contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1163,5 +1151,6 @@
 
 </body>
 </html>
+
 
 
