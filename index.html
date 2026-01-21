@@ -1014,63 +1014,66 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2>Let's Build Something Great Together</h2>
-            <p class="contact-subtitle">Tell us about your project and we'll get back to you within 24 hours</p>
+<section class="contact" id="contact">
+    <div class="container">
+        <h2>Let's Build Something Great Together</h2>
+        <p class="contact-subtitle">Ping us and we’ll guide you step-by-step from Discovery → Proposal → Project Start.</p>
 
-            <form class="contact-form">
-                <div class="form-group">
-                    <label for="name">Full Name *</label>
-                    <input type="text" id="name" name="name" required placeholder="John Doe">
+        <!-- Form look but all buttons trigger actions -->
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! Please choose a preferred contact method below to get started immediately.');">
+            <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required placeholder="John Doe">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required placeholder="john@company.com">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000">
+            </div>
+
+            <div class="form-group">
+                <label for="service">Service Interested In *</label>
+                <select id="service" name="service" required>
+                    <option value="">Select a service...</option>
+                    <option value="dashboard">Dashboard & Automation</option>
+                    <option value="website">Website Development</option>
+                    <option value="marketing">Digital Marketing (SEO & Content)</option>
+                    <option value="multiple">Multiple Services</option>
+                    <option value="other">Not Sure / Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Project Details</label>
+                <textarea id="message" name="message" placeholder="Tell us about your project, timeline, and any specific requirements..."></textarea>
+            </div>
+
+            <!-- Fake submit button that triggers modal/alert -->
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Get Started</button>
+
+            <!-- Direct alternative contact options -->
+            <div class="contact-alternatives" style="margin-top: 1.5rem; text-align: center;">
+                <p style="margin-bottom: 0.5rem;">Prefer to reach out directly?</p>
+                <div class="contact-links" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                    <a href="https://wa.me/1234567890" class="contact-link btn btn-secondary" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem;">
+                        <span>💬</span> WhatsApp
+                    </a>
+                    <a href="mailto:hello@collabifyspace.com" class="contact-link btn btn-secondary" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem;">
+                        <span>✉️</span> Email Us
+                    </a>
+                    <a href="https://calendly.com/collabifyspace" class="contact-link btn btn-secondary" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem;">
+                        <span>📅</span> Schedule Call
+                    </a>
                 </div>
-
-                <div class="form-group">
-                    <label for="email">Email Address *</label>
-                    <input type="email" id="email" name="email" required placeholder="john@company.com">
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000">
-                </div>
-
-                <div class="form-group">
-                    <label for="service">Service Interested In *</label>
-                    <select id="service" name="service" required>
-                        <option value="">Select a service...</option>
-                        <option value="dashboard">Dashboard & Automation</option>
-                        <option value="website">Website Development</option>
-                        <option value="marketing">Digital Marketing (SEO & Content)</option>
-                        <option value="multiple">Multiple Services</option>
-                        <option value="other">Not Sure / Other</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Project Details</label>
-                    <textarea id="message" name="message" placeholder="Tell us about your project, timeline, and any specific requirements..."></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
-
-                <div class="contact-alternatives">
-                    <p>Prefer to reach out directly?</p>
-                    <div class="contact-links">
-                        <a href="https://wa.me/1234567890" class="contact-link">
-                            <span>💬</span> WhatsApp
-                        </a>
-                        <a href="mailto:hello@collabifyspace.com" class="contact-link">
-                            <span>✉️</span> Email Us
-                        </a>
-                        <a href="https://calendly.com/collabifyspace" class="contact-link">
-                            <span>📅</span> Schedule Call
-                        </a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </section>
+            </div>
+        </form>
+    </div>
+</section>
 
 
     <script>
@@ -1256,6 +1259,7 @@
 
 </body>
 </html>
+
 
 
 
