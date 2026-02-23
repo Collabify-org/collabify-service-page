@@ -1298,6 +1298,95 @@
                 font-size: 13px;
             }
         }
+
+        .team-section {
+    padding: 140px 0;
+    background: #0B0F14;
+    text-align: center;
+}
+
+.team-header {
+    margin-bottom: 80px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.team-header.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.team-header h2 {
+    font-size: 42px;
+    margin-bottom: 14px;
+}
+
+.team-header p {
+    color: #9CA3AF;
+}
+
+.team-circle-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    flex-wrap: wrap;
+}
+
+.team-circle {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s ease;
+}
+
+.team-circle.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.circle-avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    margin: 0 auto 24px;
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.25);
+    transition: all 0.4s ease;
+}
+
+.team-circle:hover .circle-avatar {
+    transform: scale(1.08);
+    box-shadow: 0 0 60px rgba(34, 211, 238, 0.4);
+}
+
+.team-circle h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.team-circle span {
+    font-size: 14px;
+    color: #9CA3AF;
+}
+
+@media (max-width: 768px) {
+    .team-circle-grid {
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    .circle-avatar {
+        width: 140px;
+        height: 140px;
+        font-size: 56px;
+    }
+}
     </style>
 </head>
 <body>
@@ -1632,7 +1721,37 @@
             </div>
         </div>
     </section>
+    
+<section class="team-section">
+    <div class="container">
+        <div class="team-header">
+            <h2>The Engineers Behind the Systems</h2>
+            <p>Built by full-stack engineers. Guided by operational intelligence.</p>
+        </div>
 
+        <div class="team-circle-grid">
+            
+            <div class="team-circle">
+                <div class="circle-avatar">🧑‍💻</div>
+                <h3>Full-Stack Engineer</h3>
+                <span>Systems & AI Architecture</span>
+            </div>
+
+            <div class="team-circle">
+                <div class="circle-avatar">👨‍💻</div>
+                <h3>Full-Stack Engineer</h3>
+                <span>Backend & Performance</span>
+            </div>
+
+            <div class="team-circle">
+                <div class="circle-avatar">📊</div>
+                <h3>Operational Consultant</h3>
+                <span>Execution & Efficiency Strategy</span>
+            </div>
+
+        </div>
+    </div>
+</section>
     <!-- FINAL CTA SECTION -->
     <section class="final-cta">
         <div class="cta-bg"></div>
@@ -2012,6 +2131,7 @@
     </script>
 </body>
 </html>
+
 
 
 
