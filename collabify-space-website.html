@@ -1,0 +1,2283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collabify Space — AI-Enabled Web & Software Development</title>
+<meta name="description" content="Collabify Space builds revenue-focused websites and software systems for e-commerce, real estate, SaaS, and education businesses across India, USA, UK, Australia, New Zealand, and the Gulf.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0f;
+    --ink2: #16161f;
+    --ink3: #1e1e2a;
+    --surface: #f5f4f0;
+    --surface2: #eeecea;
+    --accent: #e8ff47;
+    --accent2: #00e5c0;
+    --muted: #6b6b80;
+    --border: rgba(255,255,255,0.08);
+    --border-light: rgba(0,0,0,0.1);
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --radius: 12px;
+    --radius-lg: 20px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--ink);
+    color: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 2rem;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #fff;
+    cursor: pointer;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.07); }
+  .nav-links a.active { color: var(--accent); background: rgba(232,255,71,0.08); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: var(--ink) !important;
+    font-weight: 700 !important;
+    padding: 0.5rem 1.25rem !important;
+    border-radius: 8px !important;
+  }
+  .nav-cta:hover { background: #fff !important; color: var(--ink) !important; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  /* ===== PAGE SYSTEM ===== */
+  .page { display: none; padding-top: 72px; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ===== LAYOUT ===== */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .section { padding: 6rem 0; }
+  .section-sm { padding: 4rem 0; }
+
+  /* ===== TYPOGRAPHY ===== */
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(232,255,71,0.3);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-tag::before { content: '●'; font-size: 0.5rem; }
+
+  .label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.85rem 2rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    line-height: 1;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--ink);
+  }
+  .btn-primary:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(232,255,71,0.3); }
+
+  .btn-outline {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--ink2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    transition: all 0.3s;
+  }
+  .card:hover { border-color: rgba(232,255,71,0.2); transform: translateY(-4px); }
+
+  /* ===== GRID ===== */
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+
+  /* ===== DIVIDER ===== */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* ===== BADGE ===== */
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+    background: rgba(232,255,71,0.12);
+    color: var(--accent);
+    border: 1px solid rgba(232,255,71,0.2);
+  }
+
+  .badge-teal {
+    background: rgba(0,229,192,0.12);
+    color: var(--accent2);
+    border-color: rgba(0,229,192,0.2);
+  }
+
+  /* ===== ACCENT LINE ===== */
+  .accent-line {
+    display: inline-block;
+    width: 40px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ===== STAT BLOCK ===== */
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem; }
+
+  /* ===== FAQ ACCORDION ===== */
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 0;
+  }
+  .faq-q {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 1rem;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+  .faq-q::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--accent);
+    flex-shrink: 0;
+    line-height: 1;
+    transition: transform 0.3s;
+  }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding-top 0.3s;
+  }
+  .faq-item.open .faq-a { max-height: 400px; padding-top: 1rem; }
+
+  /* ===== PROCESS STEPS ===== */
+  .process-step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .step-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 800;
+    color: rgba(232,255,71,0.15);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 60px;
+    text-align: center;
+  }
+
+  /* ===== TECH PILL ===== */
+  .tech-pill {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.75);
+    margin: 0.2rem;
+  }
+
+  /* ===== CTA SECTION ===== */
+  .cta-section {
+    background: linear-gradient(135deg, var(--ink2) 0%, var(--ink3) 100%);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(232,255,71,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink2);
+    border-top: 1px solid var(--border);
+    padding: 4rem 0 2rem;
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+  .footer-logo span { color: var(--accent); }
+  .footer-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; max-width: 280px; }
+  .footer-col h4 {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 1.25rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.6rem; }
+  .footer-col ul li a {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--accent); }
+  .footer-bottom {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  /* ===== HERO SPECIFIC ===== */
+  .hero {
+    min-height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(232,255,71,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(0,229,192,0.05) 0%, transparent 60%);
+  }
+  .hero-grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.6);
+    max-width: 520px;
+    line-height: 1.65;
+    margin-bottom: 2.5rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .hero-markets {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .market-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .market-pill {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 0.3rem 0.85rem;
+    border-radius: 100px;
+  }
+
+  /* ===== SERVICE PAGE HERO ===== */
+  .page-hero {
+    padding: 5rem 0 4rem;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    right: -100px;
+    top: -100px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(232,255,71,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .page-hero h1 { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 1.25rem; }
+  .page-hero p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.6);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  /* ===== FEATURE GRID ===== */
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(232,255,71,0.1);
+    border: 1px solid rgba(232,255,71,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+  .timeline-item {
+    position: relative;
+    padding-bottom: 2rem;
+    padding-left: 2rem;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.55rem;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--ink);
+  }
+  .timeline-week {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .timeline-step { font-family: var(--font-display); font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .timeline-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+  /* ===== CASE STUDY ===== */
+  .case-card {
+    background: var(--ink2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    transition: all 0.3s;
+  }
+  .case-card:hover { border-color: rgba(232,255,71,0.2); }
+  .case-result {
+    background: rgba(232,255,71,0.06);
+    border: 1px solid rgba(232,255,71,0.15);
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  /* ===== INDUSTRY STRIP ===== */
+  .industry-strip {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+  }
+  .industry-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+  .industry-item:hover { border-color: rgba(232,255,71,0.4); color: var(--accent); background: rgba(232,255,71,0.04); }
+  .industry-item .icon { font-size: 1.2rem; }
+
+  /* ===== AI FEATURE BLOCK ===== */
+  .ai-block {
+    background: linear-gradient(135deg, var(--ink2), var(--ink3));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .ai-block::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(0,229,192,0.1) 0%, transparent 60%);
+  }
+  .ai-block:hover { border-color: rgba(0,229,192,0.3); }
+  .ai-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(0,229,192,0.1);
+    border: 1px solid rgba(0,229,192,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1.25rem;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: var(--ink);
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+    }
+    .hamburger { display: flex; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .hero h1 { font-size: 2.5rem; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    .nav-cta { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .section { padding: 4rem 0; }
+    .container { padding: 0 1.25rem; }
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease forwards; }
+  .fade-up-2 { animation: fadeUp 0.7s 0.15s ease forwards; opacity: 0; }
+  .fade-up-3 { animation: fadeUp 0.7s 0.3s ease forwards; opacity: 0; }
+  .fade-up-4 { animation: fadeUp 0.7s 0.45s ease forwards; opacity: 0; }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .pulse { animation: pulse-dot 2s infinite; }
+
+  /* ===== INLINE SEPARATOR ===== */
+  .sep { color: var(--muted); margin: 0 0.5rem; }
+
+  /* ===== PRICING RANGE ===== */
+  .pricing-card {
+    background: var(--ink2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    text-align: center;
+  }
+  .pricing-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, rgba(232,255,71,0.06), var(--ink2));
+  }
+  .pricing-tier {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .pricing-range {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin: 1rem 0;
+  }
+  .pricing-desc { font-size: 0.85rem; color: var(--muted); }
+
+  /* ===== WHY US TABLE ===== */
+  .comparison-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+    align-items: center;
+  }
+  .comparison-row:first-child {
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px 8px 0 0;
+    font-weight: 700;
+    font-family: var(--font-display);
+  }
+  .comparison-col { padding: 0.5rem 1rem; font-size: 0.88rem; }
+  .check { color: var(--accent); font-size: 1.1rem; }
+  .cross { color: var(--muted); font-size: 1.1rem; }
+
+  /* ===== SCROLL INDICATOR ===== */
+  .scroll-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">Collabify<span>Space</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
+    <li><a onclick="showPage('ecommerce')" id="nav-ecommerce">E-Commerce</a></li>
+    <li><a onclick="showPage('realestate')" id="nav-realestate">Real Estate</a></li>
+    <li><a onclick="showPage('saas')" id="nav-saas">SaaS / IT</a></li>
+    <li><a onclick="showPage('education')" id="nav-education">Education</a></li>
+    <li><a onclick="showPage('ai')" id="nav-ai">AI Enhancements</a></li>
+    <li><a onclick="showPage('casestudies')" id="nav-casestudies">Case Studies</a></li>
+    <li><a onclick="showPage('faq')" id="nav-faq">FAQ</a></li>
+    <li><a class="nav-cta" onclick="scrollCTA()">Book a Call</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ================================================================ -->
+<!-- PAGE: HOME -->
+<!-- ================================================================ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="container" style="position:relative;z-index:1;padding-top:2rem;padding-bottom:4rem;">
+      <div class="hero-tag fade-up">AI-Enabled Digital Infrastructure Partner</div>
+      <h1 class="fade-up-2">We Build Digital<br>Infrastructure That<br><em>Grows Your Business</em></h1>
+      <p class="hero-sub fade-up-3">Custom website and software development for e-commerce, real estate, SaaS, and education companies — powered by AI-ready architecture and built for international scale.</p>
+      <div class="hero-actions fade-up-4">
+        <a class="btn btn-primary" onclick="scrollCTA()">Book a Strategy Call →</a>
+        <a class="btn btn-outline" onclick="showPage('casestudies')">View Case Studies</a>
+      </div>
+      <div class="hero-markets fade-up-4">
+        <span class="market-label">Serving</span>
+        <span class="market-pill">🇮🇳 India</span>
+        <span class="market-pill">🇺🇸 USA</span>
+        <span class="market-pill">🇬🇧 UK</span>
+        <span class="market-pill">🇦🇺 Australia</span>
+        <span class="market-pill">🇳🇿 New Zealand</span>
+        <span class="market-pill">🌍 Gulf Countries</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO WE ARE -->
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;">
+        <div>
+          <span class="label">Who We Are</span>
+          <h2 style="font-size:2.4rem;margin-bottom:1.5rem;">Not an Agency.<br>A Digital Infrastructure Partner.</h2>
+          <p style="color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:1.25rem;">Collabify Space is an engineering team that designs, builds, and optimizes business-critical systems: websites, software platforms, automation workflows, and AI-enhanced customer journeys.</p>
+          <p style="color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:2rem;">Our clients don't come to us for a website. They come because their current digital setup is costing them customers, slowing operations, or failing to convert. We fix that.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div style="padding:1.25rem;background:var(--ink2);border:1px solid var(--border);border-radius:10px;">
+              <div class="stat-num">150+</div>
+              <div class="stat-label">Projects Delivered</div>
+            </div>
+            <div style="padding:1.25rem;background:var(--ink2);border:1px solid var(--border);border-radius:10px;">
+              <div class="stat-num">6</div>
+              <div class="stat-label">Global Markets</div>
+            </div>
+            <div style="padding:1.25rem;background:var(--ink2);border:1px solid var(--border);border-radius:10px;">
+              <div class="stat-num">8+</div>
+              <div class="stat-label">Years Engineering</div>
+            </div>
+            <div style="padding:1.25rem;background:var(--ink2);border:1px solid var(--border);border-radius:10px;">
+              <div class="stat-num">98%</div>
+              <div class="stat-label">Client Retention</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="padding:2rem;background:var(--ink2);border:1px solid var(--border);border-radius:var(--radius-lg);">
+            <div style="margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);">
+              <div style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;">We Are NOT</div>
+              <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                <span style="font-size:0.9rem;color:rgba(255,255,255,0.4);text-decoration:line-through;">A cheap outsourcing agency</span>
+                <span style="font-size:0.9rem;color:rgba(255,255,255,0.4);text-decoration:line-through;">A freelancer collective</span>
+                <span style="font-size:0.9rem;color:rgba(255,255,255,0.4);text-decoration:line-through;">A generic web developer</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;">We ARE</div>
+              <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                <div style="display:flex;align-items:center;gap:0.75rem;">
+                  <span style="color:var(--accent);font-size:1.1rem;">✓</span>
+                  <span style="font-size:0.9rem;color:rgba(255,255,255,0.8);">A digital infrastructure partner</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:0.75rem;">
+                  <span style="color:var(--accent);font-size:1.1rem;">✓</span>
+                  <span style="font-size:0.9rem;color:rgba(255,255,255,0.8);">An AI-enabled development company</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:0.75rem;">
+                  <span style="color:var(--accent);font-size:1.1rem;">✓</span>
+                  <span style="font-size:0.9rem;color:rgba(255,255,255,0.8);">A revenue-focused engineering team</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="section" style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:4rem;">
+        <span class="label">Our Specializations</span>
+        <h2 style="font-size:2.5rem;">Four Industries.<br>Deep Expertise.</h2>
+      </div>
+      <div class="grid-2">
+        <div class="card" onclick="showPage('ecommerce')" style="cursor:pointer;">
+          <div class="feature-icon">🛒</div>
+          <div class="badge" style="margin-bottom:1rem;">E-Commerce</div>
+          <h3 style="font-size:1.4rem;margin-bottom:0.75rem;">E-Commerce Website Development</h3>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;line-height:1.7;margin-bottom:1.5rem;">High-performance online stores on Shopify, WooCommerce, or custom headless architecture — engineered for conversion, performance, and global scale.</p>
+          <span style="color:var(--accent);font-size:0.85rem;font-weight:600;">Explore → </span>
+        </div>
+        <div class="card" onclick="showPage('realestate')" style="cursor:pointer;">
+          <div class="feature-icon">🏢</div>
+          <div class="badge" style="margin-bottom:1rem;">Real Estate</div>
+          <h3 style="font-size:1.4rem;margin-bottom:0.75rem;">Real Estate Website Development</h3>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;line-height:1.7;margin-bottom:1.5rem;">Property listing platforms, CRM-integrated agent portals, IDX/MLS systems, and AI lead qualification for agencies and developers globally.</p>
+          <span style="color:var(--accent);font-size:0.85rem;font-weight:600;">Explore → </span>
+        </div>
+        <div class="card" onclick="showPage('saas')" style="cursor:pointer;">
+          <div class="feature-icon">⚙️</div>
+          <div class="badge" style="margin-bottom:1rem;">SaaS / IT</div>
+          <h3 style="font-size:1.4rem;margin-bottom:0.75rem;">SaaS & IT Platform Development</h3>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;line-height:1.7;margin-bottom:1.5rem;">Custom SaaS platforms, client dashboards, API-first architecture, and multi-tenant systems for technology companies scaling globally.</p>
+          <span style="color:var(--accent);font-size:0.85rem;font-weight:600;">Explore → </span>
+        </div>
+        <div class="card" onclick="showPage('education')" style="cursor:pointer;">
+          <div class="feature-icon">🎓</div>
+          <div class="badge" style="margin-bottom:1rem;">Education</div>
+          <h3 style="font-size:1.4rem;margin-bottom:0.75rem;">Education & LMS Platform Development</h3>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;line-height:1.7;margin-bottom:1.5rem;">LMS platforms, online course systems, student portals, and EdTech infrastructure for schools, universities, and digital learning businesses.</p>
+          <span style="color:var(--accent);font-size:0.85rem;font-weight:600;">Explore → </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI ENHANCEMENT -->
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
+        <div>
+          <span class="label">AI Enhancement Layer</span>
+          <h2 style="font-size:2.4rem;margin-bottom:1.25rem;">Every Website We Build Is <em style="font-style:normal;color:var(--accent2);">AI-Ready</em></h2>
+          <p style="color:rgba(255,255,255,0.6);line-height:1.75;margin-bottom:2rem;">We integrate an AI enhancement layer into every project — or as a standalone upgrade. AI is not a feature we add at the end. It is part of how we architect from day one.</p>
+          <a class="btn btn-outline" onclick="showPage('ai')">View AI Services →</a>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="ai-block">
+            <div class="ai-icon">🤖</div>
+            <div style="font-family:var(--font-display);font-size:0.95rem;font-weight:600;margin-bottom:0.4rem;">AI Chatbots</div>
+            <div style="font-size:0.82rem;color:var(--muted);">Trained on your business data</div>
+          </div>
+          <div class="ai-block">
+            <div class="ai-icon">🎙️</div>
+            <div style="font-family:var(--font-display);font-size:0.95rem;font-weight:600;margin-bottom:0.4rem;">Voice Agents</div>
+            <div style="font-size:0.82rem;color:var(--muted);">24/7 automated calls</div>
+          </div>
+          <div class="ai-block">
+            <div class="ai-icon">🎯</div>
+            <div style="font-family:var(--font-display);font-size:0.95rem;font-weight:600;margin-bottom:0.4rem;">Lead Qualification</div>
+            <div style="font-size:0.82rem;color:var(--muted);">Score & route automatically</div>
+          </div>
+          <div class="ai-block">
+            <div class="ai-icon">⚡</div>
+            <div style="font-family:var(--font-display);font-size:0.95rem;font-weight:600;margin-bottom:0.4rem;">Workflow Automation</div>
+            <div style="font-size:0.82rem;color:var(--muted);">Eliminate manual overhead</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:4rem;">
+        <span class="label">How We Work</span>
+        <h2 style="font-size:2.5rem;">Five Steps from<br>Concept to Launch</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;position:relative;">
+        <div style="position:absolute;top:30px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.3;"></div>
+        <div style="text-align:center;position:relative;">
+          <div style="width:60px;height:60px;border-radius:50%;background:rgba(232,255,71,0.1);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:var(--accent);">01</div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:0.9rem;margin-bottom:0.4rem;">Discovery</div>
+          <div style="font-size:0.78rem;color:var(--muted);">Business goals, tech audit, scope</div>
+        </div>
+        <div style="text-align:center;position:relative;">
+          <div style="width:60px;height:60px;border-radius:50%;background:rgba(232,255,71,0.08);border:1px solid rgba(232,255,71,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:rgba(232,255,71,0.6);">02</div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:0.9rem;margin-bottom:0.4rem;">Architecture</div>
+          <div style="font-size:0.78rem;color:var(--muted);">System design before any code</div>
+        </div>
+        <div style="text-align:center;position:relative;">
+          <div style="width:60px;height:60px;border-radius:50%;background:rgba(232,255,71,0.08);border:1px solid rgba(232,255,71,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:rgba(232,255,71,0.6);">03</div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:0.9rem;margin-bottom:0.4rem;">Development</div>
+          <div style="font-size:0.78rem;color:var(--muted);">Sprint-based with weekly updates</div>
+        </div>
+        <div style="text-align:center;position:relative;">
+          <div style="width:60px;height:60px;border-radius:50%;background:rgba(232,255,71,0.08);border:1px solid rgba(232,255,71,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:rgba(232,255,71,0.6);">04</div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:0.9rem;margin-bottom:0.4rem;">QA & Security</div>
+          <div style="font-size:0.78rem;color:var(--muted);">Full audit before launch</div>
+        </div>
+        <div style="text-align:center;position:relative;">
+          <div style="width:60px;height:60px;border-radius:50%;background:rgba(232,255,71,0.08);border:1px solid rgba(232,255,71,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:rgba(232,255,71,0.6);">05</div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:0.9rem;margin-bottom:0.4rem;">Launch & Support</div>
+          <div style="font-size:0.78rem;color:var(--muted);">Training & ongoing retainer</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SNIPPET -->
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:start;">
+        <div>
+          <span class="label">Quick Answers</span>
+          <h2 style="font-size:2rem;margin-bottom:1.25rem;">Common Questions</h2>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.92rem;line-height:1.7;margin-bottom:2rem;">We've answered the most common questions here. For the complete FAQ covering cost, timelines, security, AI, and more:</p>
+          <a class="btn btn-outline" onclick="showPage('faq')">Full FAQ Page →</a>
+        </div>
+        <div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">What types of businesses do you work with?</div>
+            <div class="faq-a">We work with e-commerce brands, real estate agencies, SaaS companies, and educational institutions at growth stage and above — typically businesses with 10+ employees or consistent revenue who need a professional digital infrastructure partner, not a freelancer.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Do you work with international clients remotely?</div>
+            <div class="faq-a">Yes. All project communication, design reviews, sprint updates, and handover documentation are structured for remote international collaboration. We work across time zones — USA, UK, Australia, Gulf, and India — without friction.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">How long does a typical project take?</div>
+            <div class="faq-a">A standard business website: 4–6 weeks. A custom e-commerce store or SaaS platform: 8–20 weeks. We provide a scoped timeline estimate in every discovery session, at no charge for qualified projects.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Do you lock us into proprietary technology?</div>
+            <div class="faq-a">No. We build on open-source and widely-adopted technology stacks. You own your code, database, and infrastructure. Everything we build is documented and transferable.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section" id="home-cta">
+    <div class="container" style="position:relative;z-index:1;">
+      <span class="label" style="display:block;text-align:center;">Ready to Start?</span>
+      <h2 style="font-size:2.8rem;margin-bottom:1.25rem;">Build Something That Works</h2>
+      <p style="color:rgba(255,255,255,0.6);max-width:500px;margin:0 auto 2.5rem;line-height:1.7;">If your current website is not generating leads, converting visitors, or scaling with your business — it's an infrastructure problem. Let us audit and fix it.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Book a Strategy Call →</a>
+        <a class="btn btn-outline" onclick="showPage('casestudies')">View Our Work</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">Collabify<span>Space</span></div>
+          <p class="footer-desc">An AI-enabled custom website and software development company serving clients across India, USA, UK, Australia, New Zealand, and Gulf countries.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a onclick="showPage('ecommerce')">E-Commerce Development</a></li>
+            <li><a onclick="showPage('realestate')">Real Estate Platforms</a></li>
+            <li><a onclick="showPage('saas')">SaaS & IT Development</a></li>
+            <li><a onclick="showPage('education')">Education Platforms</a></li>
+            <li><a onclick="showPage('ai')">AI Enhancements</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a onclick="showPage('casestudies')">Case Studies</a></li>
+            <li><a onclick="showPage('faq')">FAQ</a></li>
+            <li><a href="mailto:team@collabifyspace.com">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Markets</h4>
+          <ul>
+            <li><a>India</a></li>
+            <li><a>United States</a></li>
+            <li><a>United Kingdom</a></li>
+            <li><a>Australia</a></li>
+            <li><a>New Zealand</a></li>
+            <li><a>Gulf Countries</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Collabify Space. All rights reserved.</span>
+        <span>team@collabifyspace.com</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ================================================================ -->
+<!-- PAGE: E-COMMERCE -->
+<!-- ================================================================ -->
+<div class="page" id="page-ecommerce">
+  <div class="page-hero">
+    <div class="container">
+      <span class="label">E-Commerce Development</span>
+      <div class="hero-tag">Shopify · WooCommerce · Headless · Custom</div>
+      <h1>E-Commerce Website Development That Converts Browsers Into Buyers</h1>
+      <p>We build online stores designed around your customer's purchase journey — from single-product DTC brands to multi-category marketplaces engineered for performance, scalability, and revenue growth.</p>
+      <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+        <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Start Your Project →</a>
+        <a class="btn btn-outline" onclick="showPage('casestudies')">See Case Studies</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;">
+        <div>
+          <span class="label">The Real Problem</span>
+          <h2 style="font-size:2rem;margin-bottom:1.25rem;">Why Most E-Commerce Stores Fail to Convert</h2>
+          <p style="color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:1rem;">Slow load times, poor mobile UX, broken checkout flows, and backend systems that don't sync in real time — these are infrastructure failures dressed up as marketing problems.</p>
+          <p style="color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:1.5rem;">Generic templates built for everything serve no one well. Your store needs to be built around your product catalog, your customer's behavior, and your target market's payment preferences.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div style="padding:1rem;background:rgba(255,59,48,0.06);border:1px solid rgba(255,59,48,0.15);border-radius:10px;">
+              <div style="font-size:1.8rem;font-weight:800;font-family:var(--font-display);color:#ff6b6b;">70%</div>
+              <div style="font-size:0.8rem;color:var(--muted);">Cart abandonment from checkout friction</div>
+            </div>
+            <div style="padding:1rem;background:rgba(255,59,48,0.06);border:1px solid rgba(255,59,48,0.15);border-radius:10px;">
+              <div style="font-size:1.8rem;font-weight:800;font-family:var(--font-display);color:#ff6b6b;">8s</div>
+              <div style="font-size:0.8rem;color:var(--muted);">Average load time kills mobile conversions</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="label">Platform Selection</span>
+          <h2 style="font-size:2rem;margin-bottom:1.25rem;">We Recommend the Right Platform for Your Model</h2>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div style="padding:1.25rem;background:var(--ink2);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.4rem;">Shopify / Shopify Plus</div>
+              <div style="font-size:0.85rem;color:var(--muted);">Best for speed-to-market, subscriptions, and international multi-currency stores</div>
+            </div>
+            <div style="padding:1.25rem;background:var(--ink2);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.4rem;">WooCommerce</div>
+              <div style="font-size:0.85rem;color:var(--muted);">Best for deep content integration, complex configurators, heavy customization</div>
+            </div>
+            <div style="padding:1.25rem;background:var(--ink2);border:1px solid rgba(232,255,71,0.2);border-radius:12px;">
+              <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.4rem;">Custom Headless Commerce <span class="badge" style="margin-left:0.5rem;">Recommended</span></div>
+              <div style="font-size:0.85rem;color:var(--muted);">Next.js frontend + commerce API for maximum performance and unique UX</div>
+            </div>
+            <div style="padding:1.25rem;background:var(--ink2);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.4rem;">Magento / Adobe Commerce</div>
+              <div style="font-size:0.85rem;color:var(--muted);">Enterprise catalogs with B2B pricing, multi-store, and ERP integrations</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section" style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:3rem;">
+        <span class="label">Core Features</span>
+        <h2 style="font-size:2.2rem;">What We Build Into Every Store</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="feature-icon">⚡</div>
+          <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Performance Engineering</h3>
+          <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">LCP under 2.5s, CLS below 0.1, FID under 100ms. Core Web Vitals optimization is non-negotiable on every build we deliver.</p>
+        </div>
+        <div class="card">
+          <div class="feature-icon">🌍</div>
+          <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Multi-Currency & Multi-Region</h3>
+          <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Geolocation-based currency, regional pricing, localized payment gateways, and shipping zone configuration for global brands.</p>
+        </div>
+        <div class="card">
+          <div class="feature-icon">🔗</div>
+          <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Inventory & ERP Integration</h3>
+          <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Real-time sync with inventory management (Linnworks, SKULabs), dropshipping supplier APIs, and warehouse management systems.</p>
+        </div>
+        <div class="card">
+          <div class="feature-icon">🛡️</div>
+          <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Security & PCI Compliance</h3>
+          <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">OWASP top-10 protection, SSL, secure API key management, CSRF prevention, and PCI DSS-compliant payment handling.</p>
+        </div>
+        <div class="card">
+          <div class="feature-icon">🔍</div>
+          <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">SEO Architecture</h3>
+          <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Product Schema, canonical URLs, faceted navigation handled correctly, XML sitemaps, and page-level meta management to drive organic traffic.</p>
+        </div>
+        <div class="card">
+          <div class="feature-icon">🤖</div>
+          <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">AI-Powered Recommendations</h3>
+          <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Product recommendation engines, AI search with natural language queries, and AI chatbots that reduce support load by 40–60%.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section class="section">
+    <div class="container">
+      <span class="label">Technology Stack</span>
+      <h2 style="font-size:2rem;margin-bottom:2rem;">What We Build With</h2>
+      <div style="display:flex;flex-direction:column;gap:1.25rem;">
+        <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+          <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0;">Frontend</span>
+          <span class="tech-pill">Next.js</span><span class="tech-pill">React</span><span class="tech-pill">Liquid (Shopify)</span><span class="tech-pill">Gutenberg</span>
+        </div>
+        <div class="divider"></div>
+        <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+          <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0;">Backend</span>
+          <span class="tech-pill">Node.js</span><span class="tech-pill">PHP Laravel</span><span class="tech-pill">Python</span>
+        </div>
+        <div class="divider"></div>
+        <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+          <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0;">Platforms</span>
+          <span class="tech-pill">Shopify Plus</span><span class="tech-pill">WooCommerce</span><span class="tech-pill">Medusa.js</span><span class="tech-pill">Magento</span>
+        </div>
+        <div class="divider"></div>
+        <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+          <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0;">Payments</span>
+          <span class="tech-pill">Stripe</span><span class="tech-pill">Razorpay</span><span class="tech-pill">PayPal</span><span class="tech-pill">Afterpay</span><span class="tech-pill">Tabby (BNPL)</span>
+        </div>
+        <div class="divider"></div>
+        <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+          <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0;">Search & CDN</span>
+          <span class="tech-pill">Algolia</span><span class="tech-pill">Elasticsearch</span><span class="tech-pill">Cloudflare</span><span class="tech-pill">AWS CloudFront</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="section" style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;">
+        <div>
+          <span class="label">Development Process</span>
+          <h2 style="font-size:2rem;margin-bottom:2rem;">How We Build Your Store</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-week">Week 1–2</div>
+              <div class="timeline-step">Discovery & Technical Scoping</div>
+              <div class="timeline-desc">Catalog audit, platform selection, integration mapping, competitor analysis, conversion benchmark review.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-week">Week 2–4</div>
+              <div class="timeline-step">UX Design & Prototype</div>
+              <div class="timeline-desc">Wireframes and interactive prototypes: homepage, collections, product detail, cart, and checkout.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-week">Week 4–12</div>
+              <div class="timeline-step">Development & Integration</div>
+              <div class="timeline-desc">Frontend and backend in parallel sprints. Payment, API integrations, and performance optimization.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-week">Week 12–14</div>
+              <div class="timeline-step">QA & Security Review</div>
+              <div class="timeline-desc">Load testing, cross-device QA, security audit, and final performance benchmarking.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-week">Week 14–16</div>
+              <div class="timeline-step">Launch & Post-Launch Monitoring</div>
+              <div class="timeline-desc">Staged launch, traffic monitoring, error logging review, and 30-day post-launch support.</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="label">Timeline & Investment</span>
+          <h2 style="font-size:2rem;margin-bottom:2rem;">What to Expect</h2>
+          <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;">
+            <div style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:0.9rem;">Shopify / WooCommerce Store</span>
+              <span class="badge">8–12 weeks</span>
+            </div>
+            <div style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:0.9rem;">Custom Headless Commerce</span>
+              <span class="badge">14–20 weeks</span>
+            </div>
+            <div style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:0.9rem;">Marketplace / Multi-Vendor</span>
+              <span class="badge">20–28 weeks</span>
+            </div>
+          </div>
+          <div style="padding:1.5rem;background:rgba(232,255,71,0.06);border:1px solid rgba(232,255,71,0.2);border-radius:12px;">
+            <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.5rem;">Investment Structure</div>
+            <p style="font-size:0.88rem;color:rgba(255,255,255,0.6);line-height:1.7;">We provide scoped project estimates — not package pricing. Investments are sized to project complexity and revenue impact potential. Discovery sessions are free for qualified projects.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ E-COMMERCE -->
+  <section class="section">
+    <div class="container">
+      <div style="max-width:760px;margin:0 auto;">
+        <span class="label">FAQ</span>
+        <h2 style="font-size:2rem;margin-bottom:2.5rem;">E-Commerce Questions Answered</h2>
+        <div id="faq-ecom"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <div class="container" style="position:relative;z-index:1;">
+      <h2 style="font-size:2.5rem;margin-bottom:1rem;">Build a Store Designed to Convert</h2>
+      <p style="color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 2rem;">If your store isn't performing at the level your product deserves, the problem is almost certainly architectural.</p>
+      <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Get a Technical Audit →</a>
+    </div>
+  </div>
+  <div id="ecom-footer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- PAGE: REAL ESTATE -->
+<!-- ================================================================ -->
+<div class="page" id="page-realestate">
+  <div class="page-hero">
+    <div class="container">
+      <span class="label">Real Estate Development</span>
+      <div class="hero-tag">IDX/MLS · CRM · AI Lead Qualification · Multi-Language</div>
+      <h1>Real Estate Website Development Built for Lead Generation and Property Sales</h1>
+      <p>We build digital infrastructure for real estate professionals who understand that their website is their highest-leverage sales tool — agent portals, property search platforms, and CRM-integrated listing systems built for the markets where you operate.</p>
+      <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+        <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Request a Platform Audit →</a>
+        <a class="btn btn-outline" onclick="showPage('casestudies')">Real Estate Case Study</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:3rem;">
+        <span class="label">Who We Build For</span>
+        <h2 style="font-size:2.2rem;">Real Estate Businesses We Serve</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="feature-icon">🏢</div>
+          <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">Agencies & Brokerages</h3>
+          <p style="font-size:0.85rem;color:var(--muted);line-height:1.6;">Multi-agent platforms for property listings, agent profiles, lead routing, and CRM integration — managing 20 to 20,000 listings.</p>
+        </div>
+        <div class="card">
+          <div class="feature-icon">🏗️</div>
+          <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">Property Developers</h3>
+          <p style="font-size:0.85rem;color:var(--muted);line-height:1.6;">Project microsites with floor plan viewers, virtual tours, reservation systems, and launch campaign integrations.</p>
+        </div>
+        <div class="card">
+          <div class="feature-icon">🌐</div>
+          <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">Property Portals</h3>
+          <p style="font-size:0.85rem;color:var(--muted);line-height:1.6;">Aggregator platforms where multiple agencies list properties, with subscription or lead-generation revenue models.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;">
+        <div>
+          <span class="label">Core Features</span>
+          <h2 style="font-size:2rem;margin-bottom:2rem;">What We Build Into Every Real Estate Platform</h2>
+          <div style="display:flex;flex-direction:column;gap:1.25rem;">
+            <div style="display:flex;gap:1rem;align-items:start;">
+              <span style="color:var(--accent);font-size:1.2rem;flex-shrink:0;margin-top:2px;">✓</span>
+              <div>
+                <div style="font-family:var(--font-display);font-weight:600;margin-bottom:0.3rem;">Advanced Property Search & Filter</div>
+                <div style="font-size:0.85rem;color:var(--muted);">Map-based browsing, polygon draw, commute time filtering, school zone overlay, saved searches with email alerts.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:1rem;align-items:start;">
+              <span style="color:var(--accent);font-size:1.2rem;flex-shrink:0;margin-top:2px;">✓</span>
+              <div>
+                <div style="font-family:var(--font-display);font-weight:600;margin-bottom:0.3rem;">CRM-Integrated Lead Routing</div>
+                <div style="font-size:0.85rem;color:var(--muted);">Every inquiry pushed to CRM in real time with source tagging, property reference, and agent assignment logic.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:1rem;align-items:start;">
+              <span style="color:var(--accent);font-size:1.2rem;flex-shrink:0;margin-top:2px;">✓</span>
+              <div>
+                <div style="font-family:var(--font-display);font-weight:600;margin-bottom:0.3rem;">Agent & Office Management Portal</div>
+                <div style="font-size:0.85rem;color:var(--muted);">Backend for agents to manage listings, upload media, track inquiries — no developer access required.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:1rem;align-items:start;">
+              <span style="color:var(--accent);font-size:1.2rem;flex-shrink:0;margin-top:2px;">✓</span>
+              <div>
+                <div style="font-family:var(--font-display);font-weight:600;margin-bottom:0.3rem;">IDX/MLS Integration (US Markets)</div>
+                <div style="font-size:0.85rem;color:var(--muted);">Full MLS listing database displayed in real time with MLS display-rule compliance.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:1rem;align-items:start;">
+              <span style="color:var(--accent);font-size:1.2rem;flex-shrink:0;margin-top:2px;">✓</span>
+              <div>
+                <div style="font-family:var(--font-display);font-weight:600;margin-bottom:0.3rem;">Multilingual & Multi-Region</div>
+                <div style="font-size:0.85rem;color:var(--muted);">Arabic/English bilingual, RTL layout, region-specific categories for Gulf and South Asian markets.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="label">AI Integration</span>
+          <h2 style="font-size:2rem;margin-bottom:1.25rem;">Turn Lead Volume Into a Qualified Pipeline</h2>
+          <div class="ai-block" style="margin-bottom:1.5rem;">
+            <div class="ai-icon">🎯</div>
+            <h3 style="font-size:1.1rem;margin-bottom:0.75rem;">AI Lead Qualification for Real Estate</h3>
+            <p style="font-size:0.88rem;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:1rem;">An AI qualification engine engages every incoming lead — asking structured questions about budget, timeline, property type, and location preference. Leads are scored and routed automatically.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+              <div style="padding:0.75rem;background:rgba(0,229,192,0.06);border-radius:8px;text-align:center;">
+                <div style="font-size:1.4rem;font-weight:800;font-family:var(--font-display);color:var(--accent2);">21%</div>
+                <div style="font-size:0.75rem;color:var(--muted);">Lead-to-appt rate (vs 8% before)</div>
+              </div>
+              <div style="padding:0.75rem;background:rgba(0,229,192,0.06);border-radius:8px;text-align:center;">
+                <div style="font-size:1.4rem;font-weight:800;font-family:var(--font-display);color:var(--accent2);">0</div>
+                <div style="font-size:0.75rem;color:var(--muted);">Manual first-contact time for agents</div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;">
+            <div style="font-family:var(--font-display);font-size:0.9rem;font-weight:700;margin-bottom:0.4rem;">Markets We've Built For</div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+              <span class="badge badge-teal">UAE / Dubai</span>
+              <span class="badge badge-teal">India</span>
+              <span class="badge badge-teal">USA (MLS)</span>
+              <span class="badge badge-teal">UK</span>
+              <span class="badge badge-teal">Australia</span>
+              <span class="badge badge-teal">Saudi Arabia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="max-width:760px;margin:0 auto;">
+        <span class="label">FAQ</span>
+        <h2 style="font-size:2rem;margin-bottom:2.5rem;">Real Estate Development Questions</h2>
+        <div id="faq-re"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <div class="container" style="position:relative;z-index:1;">
+      <h2 style="font-size:2.5rem;margin-bottom:1rem;">Your Website Should Be Your Best Agent</h2>
+      <p style="color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 2rem;">If your current site isn't qualifying leads and converting traffic into appointments, it's underperforming at a cost to your business every day.</p>
+      <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Request a Real Estate Audit →</a>
+    </div>
+  </div>
+  <div id="re-footer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- PAGE: SAAS/IT -->
+<!-- ================================================================ -->
+<div class="page" id="page-saas">
+  <div class="page-hero">
+    <div class="container">
+      <span class="label">SaaS & IT Development</span>
+      <div class="hero-tag">Multi-Tenant · API-First · Subscription Billing · AI-Ready</div>
+      <h1>Custom SaaS Platform & IT Website Development for Technology Businesses Scaling Globally</h1>
+      <p>We build the digital foundation that technology companies need to acquire customers, onboard them smoothly, and retain them at scale — marketing websites that convert and SaaS platforms that perform.</p>
+      <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+        <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Request Architecture Review →</a>
+        <a class="btn btn-outline" onclick="showPage('casestudies')">View Case Studies</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:3rem;">
+        <span class="label">What We Build</span>
+        <h2 style="font-size:2.2rem;">SaaS & IT Solutions</h2>
+      </div>
+      <div class="grid-2" style="gap:1.5rem;">
+        <div class="card">
+          <div class="feature-icon">📈</div>
+          <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">SaaS Marketing Websites</h3>
+          <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">High-conversion marketing sites that explain technical products to non-technical buyers and drive trial or demo conversion.</p>
+        </div>
+        <div class="card">
+          <div class="feature-icon">🏗️</div>
+          <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Custom SaaS Platforms</h3>
+          <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Multi-tenant applications with subscription billing, RBAC, usage-based pricing, white-labeling, and API documentation.</p>
+        </div>
+        <div class="card">
+          <div class="feature-icon">📊</div>
+          <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Client Dashboards & Portals</h3>
+          <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Customer-facing dashboards for data visualization, account management, and feature access — designed for SaaS-grade UX standards.</p>
+        </div>
+        <div class="card">
+          <div class="feature-icon">🔌</div>
+          <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">API Development & Integration</h3>
+          <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">RESTful and GraphQL API design, third-party integrations, webhook management, and OpenAPI/Swagger documentation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;">
+        <div>
+          <span class="label">Technology Stack</span>
+          <h2 style="font-size:2rem;margin-bottom:2rem;">Enterprise-Grade Stack</h2>
+          <div style="display:flex;flex-direction:column;gap:1.25rem;">
+            <div>
+              <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;">Frontend</div>
+              <div><span class="tech-pill">React</span><span class="tech-pill">Next.js</span><span class="tech-pill">Vue.js</span><span class="tech-pill">TypeScript</span></div>
+            </div>
+            <div>
+              <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;">Backend</div>
+              <div><span class="tech-pill">Node.js</span><span class="tech-pill">Python FastAPI</span><span class="tech-pill">Go</span><span class="tech-pill">Laravel</span></div>
+            </div>
+            <div>
+              <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;">Auth & Security</div>
+              <div><span class="tech-pill">Auth0</span><span class="tech-pill">Clerk</span><span class="tech-pill">JWT / OAuth 2.0</span><span class="tech-pill">RBAC</span></div>
+            </div>
+            <div>
+              <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;">Infrastructure</div>
+              <div><span class="tech-pill">AWS</span><span class="tech-pill">Docker</span><span class="tech-pill">Kubernetes</span><span class="tech-pill">CI/CD</span></div>
+            </div>
+            <div>
+              <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;">Billing</div>
+              <div><span class="tech-pill">Stripe</span><span class="tech-pill">Paddle</span><span class="tech-pill">Chargebee</span></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="label">Key Capabilities</span>
+          <h2 style="font-size:2rem;margin-bottom:2rem;">Built for Scale</h2>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-family:var(--font-display);font-weight:700;font-size:0.95rem;margin-bottom:0.4rem;">Multi-Tenant Architecture</div>
+              <div style="font-size:0.84rem;color:var(--muted);">Isolated tenant data, subdomain/custom domain per tenant, white-labeling — built correctly from the architecture stage.</div>
+            </div>
+            <div style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-family:var(--font-display);font-weight:700;font-size:0.95rem;margin-bottom:0.4rem;">Subscription & Billing Management</div>
+              <div style="font-size:0.84rem;color:var(--muted);">Plan management, usage metering, dunning management, invoice generation — full billing lifecycle.</div>
+            </div>
+            <div style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-family:var(--font-display);font-weight:700;font-size:0.95rem;margin-bottom:0.4rem;">Onboarding Flow Design</div>
+              <div style="font-size:0.84rem;color:var(--muted);">First-session onboarding sequences that drive activation — designed around your product's retention metrics.</div>
+            </div>
+            <div style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-family:var(--font-display);font-weight:700;font-size:0.95rem;margin-bottom:0.4rem;">GDPR & Compliance Infrastructure</div>
+              <div style="font-size:0.84rem;color:var(--muted);">Consent management, data export, deletion workflows — for UK, EU, and Australian market compliance.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="max-width:760px;margin:0 auto;">
+        <span class="label">FAQ</span>
+        <h2 style="font-size:2rem;margin-bottom:2.5rem;">SaaS & IT Development Questions</h2>
+        <div id="faq-saas"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <div class="container" style="position:relative;z-index:1;">
+      <h2 style="font-size:2.5rem;margin-bottom:1rem;">Your Product Deserves Engineering That Matches Its Ambition</h2>
+      <p style="color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 2rem;">Technical infrastructure decisions today determine your ceiling in three years. Let us architect it correctly from the start.</p>
+      <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Discuss Your Product Roadmap →</a>
+    </div>
+  </div>
+  <div id="saas-footer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- PAGE: EDUCATION -->
+<!-- ================================================================ -->
+<div class="page" id="page-education">
+  <div class="page-hero">
+    <div class="container">
+      <span class="label">Education Platform Development</span>
+      <div class="hero-tag">LMS · Student Portals · EdTech · Corporate L&D</div>
+      <h1>Education Website and Learning Platform Development for Schools, EdTech Companies, and Online Learning Businesses</h1>
+      <p>We build digital learning infrastructure — from admissions websites that convert applicants to full-featured LMS platforms that deliver, track, and monetize education at scale.</p>
+      <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+        <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Request a Platform Consultation →</a>
+        <a class="btn btn-outline" onclick="showPage('casestudies')">EdTech Case Study</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:3rem;">
+        <span class="label">Who We Build For</span>
+        <h2 style="font-size:2.2rem;">Education Institutions We Serve</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card"><div class="feature-icon">🏫</div><h3 style="font-size:1rem;margin-bottom:0.4rem;">Schools & K-12</h3><p style="font-size:0.84rem;color:var(--muted);">Admissions management, event systems, faculty profiles, parent communication portals.</p></div>
+        <div class="card"><div class="feature-icon">📚</div><h3 style="font-size:1rem;margin-bottom:0.4rem;">Coaching Institutes</h3><p style="font-size:0.84rem;color:var(--muted);">Course catalogs, batch management, live class scheduling, recorded content delivery.</p></div>
+        <div class="card"><div class="feature-icon">💻</div><h3 style="font-size:1rem;margin-bottom:0.4rem;">EdTech Companies</h3><p style="font-size:0.84rem;color:var(--muted);">Custom LMS platforms, course marketplaces, subscription learning, certification systems.</p></div>
+        <div class="card"><div class="feature-icon">🎓</div><h3 style="font-size:1rem;margin-bottom:0.4rem;">Universities</h3><p style="font-size:0.84rem;color:var(--muted);">Department management, admissions portals, student services integrations, research publication architecture.</p></div>
+        <div class="card"><div class="feature-icon">🏢</div><h3 style="font-size:1rem;margin-bottom:0.4rem;">Corporate L&D</h3><p style="font-size:0.84rem;color:var(--muted);">Employee onboarding, compliance training, certification tracking, skills development platforms.</p></div>
+        <div class="card"><div class="feature-icon">🌐</div><h3 style="font-size:1rem;margin-bottom:0.4rem;">Online Course Creators</h3><p style="font-size:0.84rem;color:var(--muted);">Own your platform. Eliminate per-student fees. Full control over branding, data, and experience.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;">
+        <div>
+          <span class="label">LMS Core Features</span>
+          <h2 style="font-size:2rem;margin-bottom:2rem;">What We Build Into Every Learning Platform</h2>
+          <div style="display:flex;flex-direction:column;gap:1.25rem;">
+            <div style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-family:var(--font-display);font-weight:600;margin-bottom:0.4rem;">Course Catalog & Enrollment</div>
+              <div style="font-size:0.84rem;color:var(--muted);">Free, paid, and subscription-access models with batch or cohort assignment.</div>
+            </div>
+            <div style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-family:var(--font-display);font-weight:600;margin-bottom:0.4rem;">Secure Video Content Delivery</div>
+              <div style="font-size:0.84rem;color:var(--muted);">HLS streaming with signed URLs — no downloadable links, no external sharing, DRM-aware.</div>
+            </div>
+            <div style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-family:var(--font-display);font-weight:600;margin-bottom:0.4rem;">Assessment & Certification</div>
+              <div style="font-size:0.84rem;color:var(--muted);">Timed tests, automated scoring, performance analytics, digitally verifiable certificates.</div>
+            </div>
+            <div style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-family:var(--font-display);font-weight:600;margin-bottom:0.4rem;">Student & Parent Portals</div>
+              <div style="font-size:0.84rem;color:var(--muted);">Progress tracking, attendance, results, fee payment history, and direct communication.</div>
+            </div>
+            <div style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-family:var(--font-display);font-weight:600;margin-bottom:0.4rem;">Admissions Management</div>
+              <div style="font-size:0.84rem;color:var(--muted);">Multi-step applications, document upload, status tracking, and admissions officer review portal.</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="label">Case Highlight</span>
+          <h2 style="font-size:2rem;margin-bottom:1.5rem;">Real Outcomes for EdTech Clients</h2>
+          <div class="case-result">
+            <div style="font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;">Pan-India Coaching Institute</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+              <div style="text-align:center;">
+                <div style="font-family:var(--font-display);font-size:1.8rem;font-weight:800;color:var(--accent);">12,000</div>
+                <div style="font-size:0.78rem;color:var(--muted);">Students migrated in 30 days</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="font-family:var(--font-display);font-size:1.8rem;font-weight:800;color:var(--accent);">38 min</div>
+                <div style="font-size:0.78rem;color:var(--muted);">Avg session (vs 12 min on YouTube)</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="font-family:var(--font-display);font-size:1.8rem;font-weight:800;color:var(--accent);">340</div>
+                <div style="font-size:0.78rem;color:var(--muted);">Online enrollments in 45 days</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="font-family:var(--font-display);font-size:1.8rem;font-weight:800;color:var(--accent);">0</div>
+                <div style="font-size:0.78rem;color:var(--muted);">Content leakage incidents post-launch</div>
+              </div>
+            </div>
+            <a style="font-size:0.85rem;color:var(--accent);cursor:pointer;" onclick="showPage('casestudies')">Read Full Case Study →</a>
+          </div>
+          <div style="margin-top:1.5rem;padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;">
+            <div style="font-family:var(--font-display);font-weight:700;font-size:0.9rem;margin-bottom:0.5rem;">Why Build Your Own LMS?</div>
+            <p style="font-size:0.84rem;color:var(--muted);line-height:1.7;">Third-party platforms charge per-student fees. With 500+ students, those fees become significant. A custom LMS eliminates per-student costs, gives you complete data ownership, and removes platform limitations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="max-width:760px;margin:0 auto;">
+        <span class="label">FAQ</span>
+        <h2 style="font-size:2rem;margin-bottom:2.5rem;">Education Platform Questions</h2>
+        <div id="faq-edu"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <div class="container" style="position:relative;z-index:1;">
+      <h2 style="font-size:2.5rem;margin-bottom:1rem;">Build the Learning Platform Your Students Deserve</h2>
+      <p style="color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 2rem;">Stop paying per-student fees to platforms you don't own. Build infrastructure that grows with you.</p>
+      <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Request an Education Platform Consultation →</a>
+    </div>
+  </div>
+  <div id="edu-footer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- PAGE: AI ENHANCEMENTS -->
+<!-- ================================================================ -->
+<div class="page" id="page-ai">
+  <div class="page-hero" style="background:linear-gradient(135deg,var(--ink) 0%,var(--ink3) 100%);">
+    <div class="container">
+      <span class="label">AI Enhancements & Integration</span>
+      <div class="hero-tag" style="border-color:rgba(0,229,192,0.3);color:var(--accent2);">Chatbots · Voice Agents · Lead Qualification · Workflow Automation</div>
+      <h1>AI Enhancements for Websites and Software Platforms That <em style="font-style:normal;color:var(--accent2);">Automate, Qualify, and Convert</em></h1>
+      <p>AI is not a product. It is a capability layer that, when properly integrated into your digital systems, reduces operational overhead, accelerates revenue cycles, and creates customer experiences your competitors cannot replicate manually.</p>
+      <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+        <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Book an AI Consultation →</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:1rem;">
+        <span class="label">The Distinction That Matters</span>
+        <h2 style="font-size:2.2rem;max-width:600px;margin:0 auto 1.5rem;">AI Tools vs AI Integration</h2>
+      </div>
+      <div style="max-width:700px;margin:0 auto;text-align:center;color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:3rem;">
+        AI tools are standalone products people use manually. AI integration is embedding AI capabilities directly into your business systems — where they operate automatically, on your data, serving your customers, within your workflow.
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:700px;margin:0 auto;">
+        <div style="padding:1.5rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;text-align:center;">
+          <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.5rem;opacity:0.4;">AI Tools (Not What We Do)</div>
+          <div style="font-size:0.84rem;color:var(--muted);">Standalone products. Manual usage. Generic outputs. Not connected to your data.</div>
+        </div>
+        <div style="padding:1.5rem;background:rgba(0,229,192,0.06);border:1px solid rgba(0,229,192,0.2);border-radius:12px;text-align:center;">
+          <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.5rem;color:var(--accent2);">AI Integration (What We Build)</div>
+          <div style="font-size:0.84rem;color:rgba(255,255,255,0.6);">Embedded. Automatic. Trained on your data. Connected to your CRM, website, and workflows.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI SERVICES -->
+  <section class="section" style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <span class="label">Our AI Enhancement Services</span>
+      <h2 style="font-size:2.2rem;margin-bottom:3rem;">Six AI Capabilities We Integrate</h2>
+      <div style="display:flex;flex-direction:column;gap:2rem;">
+
+        <div class="ai-block" style="display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;">
+          <div class="ai-icon">🤖</div>
+          <div>
+            <h3 style="font-size:1.3rem;margin-bottom:0.75rem;">AI Chatbots (Website & Platform Integrated)</h3>
+            <p style="font-size:0.9rem;color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:1rem;">Custom-trained conversational interfaces built on your business data — product catalog, service descriptions, FAQs, and pricing structure. Built using RAG architecture on OpenAI or Claude API, drawing from your specific knowledge base, not general internet data.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <span class="badge badge-teal">24/7 inquiry handling</span>
+              <span class="badge badge-teal">Lead pre-qualification</span>
+              <span class="badge badge-teal">Support automation</span>
+              <span class="badge badge-teal">CRM integration</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-block" style="display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;">
+          <div class="ai-icon">🎙️</div>
+          <div>
+            <h3 style="font-size:1.3rem;margin-bottom:0.75rem;">AI Voice Agents</h3>
+            <p style="font-size:0.9rem;color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:1rem;">AI voice agents conduct spoken conversations through phone or VoIP channels — handling inbound inquiries, outbound follow-up, appointment confirmation, and surveys. Operate 24/7 in natural conversational tone, transferring to human agents when outside scope, logging full transcripts automatically.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <span class="badge badge-teal">Inbound call handling</span>
+              <span class="badge badge-teal">Appointment confirmation</span>
+              <span class="badge badge-teal">Lead re-engagement</span>
+              <span class="badge badge-teal">Multi-language</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-block" style="display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;">
+          <div class="ai-icon">🎧</div>
+          <div>
+            <h3 style="font-size:1.3rem;margin-bottom:0.75rem;">AI Customer Support Automation</h3>
+            <p style="font-size:0.9rem;color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:1rem;">An automation layer between your support inbox and human team. Tickets are classified by type, matched against a resolution knowledge base, and either resolved automatically or routed with a suggested response — reducing first response time and handle time simultaneously. Handles 60–80% of ticket volume for e-commerce and SaaS companies.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <span class="badge badge-teal">Ticket classification</span>
+              <span class="badge badge-teal">Auto-resolution</span>
+              <span class="badge badge-teal">Smart routing</span>
+              <span class="badge badge-teal">SLA management</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-block" style="display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;">
+          <div class="ai-icon">🎯</div>
+          <div>
+            <h3 style="font-size:1.3rem;margin-bottom:0.75rem;">AI Lead Qualification Systems</h3>
+            <p style="font-size:0.9rem;color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:1rem;">Engages every incoming lead with a structured qualification sequence — budget, timeline, authority, specific need. Leads are scored and routed: high-intent immediately to sales, lower-intent to nurture sequences. Your sales team receives a prioritized, pre-qualified pipeline with context attached to every lead.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <span class="badge badge-teal">BANT qualification</span>
+              <span class="badge badge-teal">Lead scoring</span>
+              <span class="badge badge-teal">CRM push</span>
+              <span class="badge badge-teal">Nurture automation</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-block" style="display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;">
+          <div class="ai-icon">⚡</div>
+          <div>
+            <h3 style="font-size:1.3rem;margin-bottom:0.75rem;">AI Workflow Automation</h3>
+            <p style="font-size:0.9rem;color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:1rem;">Connecting your business systems — CRM, email, inventory, project management, communication platforms — through intelligent automation workflows that trigger actions based on defined conditions. When a new lead submits: create CRM contact, send qualification email, notify sales rep, set 48-hour follow-up — automatically.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <span class="badge badge-teal">n8n / Make</span>
+              <span class="badge badge-teal">Webhook architecture</span>
+              <span class="badge badge-teal">Cross-platform triggers</span>
+              <span class="badge badge-teal">Zero manual overhead</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-block" style="display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;">
+          <div class="ai-icon">📊</div>
+          <div>
+            <h3 style="font-size:1.3rem;margin-bottom:0.75rem;">AI Data Intelligence Layer</h3>
+            <p style="font-size:0.9rem;color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:1rem;">Transforming raw business data into actionable intelligence. Reporting dashboards that surface the metrics that matter, trend detection that alerts you to anomalies before they become problems, and plain-English performance summaries generated automatically on a schedule — without a dedicated data science team.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <span class="badge badge-teal">Churn risk scoring</span>
+              <span class="badge badge-teal">Inventory predictions</span>
+              <span class="badge badge-teal">Anomaly alerts</span>
+              <span class="badge badge-teal">Auto-reports</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH -->
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;">
+        <div>
+          <span class="label">Technology</span>
+          <h2 style="font-size:2rem;margin-bottom:2rem;">AI Infrastructure We Use</h2>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div>
+              <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;">LLM Infrastructure</div>
+              <div><span class="tech-pill">OpenAI GPT-4</span><span class="tech-pill">Anthropic Claude</span><span class="tech-pill">Mistral</span><span class="tech-pill">Hugging Face</span></div>
+            </div>
+            <div>
+              <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;">RAG Infrastructure</div>
+              <div><span class="tech-pill">Pinecone</span><span class="tech-pill">Weaviate</span><span class="tech-pill">LangChain</span><span class="tech-pill">LlamaIndex</span></div>
+            </div>
+            <div>
+              <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;">Voice</div>
+              <div><span class="tech-pill">Twilio Voice</span><span class="tech-pill">ElevenLabs</span><span class="tech-pill">Whisper</span></div>
+            </div>
+            <div>
+              <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;">Automation</div>
+              <div><span class="tech-pill">n8n</span><span class="tech-pill">Make (Integromat)</span><span class="tech-pill">Custom Webhooks</span></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="label">Delivery Model</span>
+          <h2 style="font-size:2rem;margin-bottom:2rem;">How Enhancements Are Delivered</h2>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div style="padding:1.5rem;background:var(--ink2);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.5rem;">Built Into a New System</div>
+              <p style="font-size:0.85rem;color:var(--muted);">AI capabilities are architected from the beginning — data models, API structure, and CMS are designed with AI enhancement in mind from day one.</p>
+            </div>
+            <div style="padding:1.5rem;background:var(--ink2);border:1px solid rgba(0,229,192,0.2);border-radius:12px;">
+              <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.5rem;color:var(--accent2);">Retrofit to an Existing System</div>
+              <p style="font-size:0.85rem;color:var(--muted);">We assess your existing website or software and integrate AI through API connections and embedded components — most capabilities can be added without a full rebuild.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div style="max-width:760px;margin:0 auto;">
+        <span class="label">FAQ</span>
+        <h2 style="font-size:2rem;margin-bottom:2.5rem;">AI Integration Questions</h2>
+        <div id="faq-ai"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <div class="container" style="position:relative;z-index:1;">
+      <h2 style="font-size:2.5rem;margin-bottom:1rem;">Add Intelligence to Your Digital Infrastructure</h2>
+      <p style="color:rgba(255,255,255,0.6);max-width:500px;margin:0 auto 2rem;">If your website handles hundreds of inquiries and your team manually processes every one — you have an automation opportunity.</p>
+      <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Book an AI Enhancement Consultation →</a>
+    </div>
+  </div>
+  <div id="ai-footer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- PAGE: CASE STUDIES -->
+<!-- ================================================================ -->
+<div class="page" id="page-casestudies">
+  <div class="page-hero">
+    <div class="container">
+      <span class="label">Case Studies</span>
+      <h1>Projects That Solve Real Business Problems</h1>
+      <p>These case studies document the business problems, technical architectures, implementation approaches, and outcomes from our engagements. Written for business owners and technical decision-makers evaluating Collabify Space as a partner.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- CASE 1 -->
+      <div class="case-card" style="margin-bottom:2rem;">
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center;">
+          <span class="badge">E-Commerce</span>
+          <span class="badge badge-teal">Multi-Region</span>
+          <span style="font-size:0.8rem;color:var(--muted);">India → UAE · Apparel</span>
+        </div>
+        <h2 style="font-size:1.8rem;margin-bottom:1rem;">Taking a Regional Apparel Brand to a Multi-Country Online Store</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+          <div>
+            <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Problem Statement</div>
+            <p style="font-size:0.88rem;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:1.5rem;">Existing WooCommerce store loaded in 8+ seconds on mobile, had no multi-currency capability, ran on shared hosting that crashed during sales events, and had no WMS integration — causing overselling and massive customer service overhead.</p>
+
+            <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">System Architecture</div>
+            <p style="font-size:0.88rem;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:1.5rem;">Headless WooCommerce backend → Next.js frontend on Vercel with AWS CloudFront CDN. Custom REST API sync with WMS. Stripe multi-currency with geolocation detection. Regional subdirectory (/ae/) with Arabic language toggle.</p>
+
+            <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Technologies Used</div>
+            <div><span class="tech-pill">Next.js</span><span class="tech-pill">WooCommerce API</span><span class="tech-pill">Vercel</span><span class="tech-pill">AWS CloudFront</span><span class="tech-pill">Algolia</span><span class="tech-pill">Stripe Multi-Currency</span></div>
+          </div>
+          <div>
+            <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Implementation Timeline</div>
+            <p style="font-size:0.88rem;color:rgba(255,255,255,0.65);margin-bottom:1.5rem;">18 weeks — Discovery → Design → Development → QA → Launch</p>
+
+            <div class="case-result">
+              <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">Results</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+                <div style="text-align:center;">
+                  <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--accent);">1.9s</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">LCP (from 8.2s)</div>
+                </div>
+                <div style="text-align:center;">
+                  <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--accent);">-22%</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">Cart abandonment</div>
+                </div>
+                <div style="text-align:center;">
+                  <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--accent);">0</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">Overselling incidents</div>
+                </div>
+                <div style="text-align:center;">
+                  <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--accent);">Q1</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">Gulf revenue established</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 2 -->
+      <div class="case-card" style="margin-bottom:2rem;">
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center;">
+          <span class="badge">Real Estate</span>
+          <span class="badge badge-teal">AI Integration</span>
+          <span style="font-size:0.8rem;color:var(--muted);">Dubai, UAE · 30 Agents · 600–800 Inquiries/Month</span>
+        </div>
+        <h2 style="font-size:1.8rem;margin-bottom:1rem;">AI-Powered Lead Management for a Dubai Real Estate Agency</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+          <div>
+            <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Problem Statement</div>
+            <p style="font-size:0.88rem;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:1.5rem;">600–800 inquiries/month across website, WhatsApp, and property portals with no unified system. Agents managed leads through personal WhatsApp. No lead source visibility, no conversion tracking, high-intent buyers lost in the noise.</p>
+
+            <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">System Architecture</div>
+            <p style="font-size:0.88rem;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:1.5rem;">Custom property listing site → HubSpot CRM as central lead database. All channels (website, WhatsApp Business API, portal imports) routed to single inbox. AI chatbot (Claude API + RAG on Pinecone) trained on listings and market FAQs. Bilingual Arabic/English throughout.</p>
+
+            <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Technologies Used</div>
+            <div><span class="tech-pill">Next.js</span><span class="tech-pill">Laravel</span><span class="tech-pill">HubSpot</span><span class="tech-pill">WhatsApp API</span><span class="tech-pill">Claude API</span><span class="tech-pill">Pinecone</span><span class="tech-pill">Mapbox</span></div>
+          </div>
+          <div>
+            <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Implementation Timeline</div>
+            <p style="font-size:0.88rem;color:rgba(255,255,255,0.65);margin-bottom:1.5rem;">14 weeks from contract to launch</p>
+
+            <div class="case-result">
+              <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">Results (First 90 Days)</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+                <div style="text-align:center;">
+                  <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--accent);">21%</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">Lead-to-appt rate (was 8%)</div>
+                </div>
+                <div style="text-align:center;">
+                  <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--accent);">0h</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">Agent first-response time</div>
+                </div>
+                <div style="text-align:center;">
+                  <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--accent);">100%</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">Lead source visibility</div>
+                </div>
+                <div style="text-align:center;">
+                  <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--accent);">↑↑</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">Marketing budget reallocation</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 3 -->
+      <div class="case-card">
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center;">
+          <span class="badge">Education / EdTech</span>
+          <span class="badge badge-teal">LMS Build</span>
+          <span style="font-size:0.8rem;color:var(--muted);">Pan-India · 12,000 Students · Coaching Institute</span>
+        </div>
+        <h2 style="font-size:1.8rem;margin-bottom:1rem;">Custom LMS for a Pan-India Competitive Exam Coaching Institute</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+          <div>
+            <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Problem Statement</div>
+            <p style="font-size:0.88rem;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:1.5rem;">12,000 students with content on public YouTube (no access control), PDFs via WhatsApp, and Zoom with no recording management. No student dashboard, no assessment system, no progress tracking, no way to measure learning outcomes. Content shared externally with no recourse.</p>
+
+            <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">System Architecture</div>
+            <p style="font-size:0.88rem;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:1.5rem;">Custom LMS on Node.js + React, deployed on AWS with CloudFront CDN. Video delivered via Bunny.net with signed URL expiry. Hierarchical course structure with access control. Timed assessment module. WhatsApp API for reminders. Razorpay for enrollment.</p>
+
+            <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Technologies Used</div>
+            <div><span class="tech-pill">React</span><span class="tech-pill">Node.js</span><span class="tech-pill">PostgreSQL</span><span class="tech-pill">AWS CloudFront</span><span class="tech-pill">Bunny.net</span><span class="tech-pill">Razorpay</span><span class="tech-pill">WhatsApp API</span></div>
+          </div>
+          <div>
+            <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Implementation Timeline</div>
+            <p style="font-size:0.88rem;color:rgba(255,255,255,0.65);margin-bottom:1.5rem;">16 weeks from discovery to launch</p>
+
+            <div class="case-result">
+              <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">Results</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+                <div style="text-align:center;">
+                  <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--accent);">12K</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">Students migrated in 30 days</div>
+                </div>
+                <div style="text-align:center;">
+                  <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--accent);">38m</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">Avg session (was 12m)</div>
+                </div>
+                <div style="text-align:center;">
+                  <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--accent);">340</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">Online enrollments in 45 days</div>
+                </div>
+                <div style="text-align:center;">
+                  <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--accent);">Zero</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">Content leakage incidents</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <div class="container" style="position:relative;z-index:1;">
+      <h2 style="font-size:2.5rem;margin-bottom:1rem;">See What We Could Build for Your Business</h2>
+      <p style="color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 2rem;">Every project begins with understanding your specific business problem. We don't apply templates — we apply experience.</p>
+      <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Book a Discovery Call →</a>
+    </div>
+  </div>
+  <div id="cs-footer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- PAGE: FAQ -->
+<!-- ================================================================ -->
+<div class="page" id="page-faq">
+  <div class="page-hero">
+    <div class="container">
+      <span class="label">Frequently Asked Questions</span>
+      <h1>Answers to Everything You Need to Know Before We Work Together</h1>
+      <p>Direct, complete answers for business owners, founders, and technical decision-makers evaluating Collabify Space. If your question isn't here, contact us directly.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container" style="max-width:900px;margin:0 auto;">
+
+      <h2 style="font-size:1.6rem;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">💰 Cost & Investment</h2>
+      <div id="faq-cost"></div>
+
+      <h2 style="font-size:1.6rem;margin:3rem 0 2rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">⏱️ Timeline</h2>
+      <div id="faq-timeline"></div>
+
+      <h2 style="font-size:1.6rem;margin:3rem 0 2rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">🌍 International Collaboration</h2>
+      <div id="faq-intl"></div>
+
+      <h2 style="font-size:1.6rem;margin:3rem 0 2rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">🔧 Maintenance & Support</h2>
+      <div id="faq-maint"></div>
+
+      <h2 style="font-size:1.6rem;margin:3rem 0 2rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">🛡️ Security</h2>
+      <div id="faq-sec"></div>
+
+      <h2 style="font-size:1.6rem;margin:3rem 0 2rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">🤖 AI Integration</h2>
+      <div id="faq-ai-main"></div>
+
+      <h2 style="font-size:1.6rem;margin:3rem 0 2rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">⚙️ Technology & Hosting</h2>
+      <div id="faq-tech"></div>
+
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <div class="container" style="position:relative;z-index:1;">
+      <h2 style="font-size:2.5rem;margin-bottom:1rem;">Still Have Questions?</h2>
+      <p style="color:rgba(255,255,255,0.6);max-width:400px;margin:0 auto 2rem;">We respond to qualified inquiries within one business day.</p>
+      <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Contact Us →</a>
+    </div>
+  </div>
+  <div id="faq-footer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- SHARED FOOTER TEMPLATE -->
+<!-- ================================================================ -->
+<template id="footer-tpl">
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">Collabify<span>Space</span></div>
+          <p class="footer-desc">An AI-enabled custom website and software development company serving clients across India, USA, UK, Australia, New Zealand, and Gulf countries.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a onclick="showPage('ecommerce')">E-Commerce Development</a></li>
+            <li><a onclick="showPage('realestate')">Real Estate Platforms</a></li>
+            <li><a onclick="showPage('saas')">SaaS & IT Development</a></li>
+            <li><a onclick="showPage('education')">Education Platforms</a></li>
+            <li><a onclick="showPage('ai')">AI Enhancements</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a onclick="showPage('casestudies')">Case Studies</a></li>
+            <li><a onclick="showPage('faq')">FAQ</a></li>
+            <li><a href="mailto:team@collabifyspace.com">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Markets</h4>
+          <ul>
+            <li><a>India</a></li>
+            <li><a>United States</a></li>
+            <li><a>United Kingdom</a></li>
+            <li><a>Australia & New Zealand</a></li>
+            <li><a>Gulf Countries</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Collabify Space. All rights reserved.</span>
+        <span>team@collabifyspace.com</span>
+      </div>
+    </div>
+  </footer>
+</template>
+
+<script>
+// ===== PAGE SYSTEM =====
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a[id^="nav-"]').forEach(a => a.classList.remove('active'));
+
+  const page = document.getElementById('page-' + id);
+  const navEl = document.getElementById('nav-' + id);
+
+  if (page) page.classList.add('active');
+  if (navEl) navEl.classList.add('active');
+
+  window.scrollTo({top: 0, behavior: 'smooth'});
+
+  // close mobile menu
+  document.getElementById('navLinks').classList.remove('open');
+}
+
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+function scrollCTA() {
+  const cta = document.getElementById('home-cta');
+  if (cta) {
+    showPage('home');
+    setTimeout(() => cta.scrollIntoView({behavior:'smooth'}), 100);
+  }
+}
+
+// ===== FAQ TOGGLE =====
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const wasOpen = item.classList.contains('open');
+  // close all siblings
+  item.parentElement.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ===== BUILD FAQ HTML =====
+function buildFaq(items) {
+  return items.map(({q,a}) => `
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">${q}</div>
+      <div class="faq-a">${a}</div>
+    </div>
+  `).join('');
+}
+
+// ===== INJECT FOOTERS =====
+function injectFooters() {
+  const tpl = document.getElementById('footer-tpl');
+  ['ecom','re','saas','edu','ai','cs','faq'].forEach(id => {
+    const el = document.getElementById(id + '-footer');
+    if (el) el.innerHTML = tpl.innerHTML;
+  });
+}
+
+// ===== FAQ DATA =====
+const faqEcom = [
+  {q:"What is the difference between Shopify development and custom e-commerce development?",a:"Shopify is a managed platform providing hosting, security, and core commerce functionality. Custom development gives you complete control over business logic, data ownership, performance, and user experience — at higher initial investment with greater long-term flexibility. We recommend the right option based on your scale, customization needs, and growth trajectory."},
+  {q:"Can you migrate my existing store to a new platform?",a:"Yes. We manage complete platform migrations including product data, customer records, order history, URL structure preservation for SEO, and payment gateway reconfiguration. We conduct a pre-migration audit to identify and resolve risks before they affect your business."},
+  {q:"How do you handle multi-currency for stores selling internationally?",a:"We implement geolocation-based currency detection, regional pricing rules, and integrate with payment gateways that support multi-currency settlement — including Stripe for global markets, Razorpay for India, and regional Gulf processors. Pricing strategy (converted vs. independently-set regional prices) is resolved in our discovery session."},
+  {q:"Will my store be optimized for mobile?",a:"Every store we build is designed mobile-first. Mobile sessions account for the majority of e-commerce traffic in most markets, and our performance benchmarks are tested on mid-range mobile devices — not just desktop."},
+  {q:"Can you integrate my store with my existing ERP or inventory system?",a:"Yes. We integrate with SAP, Tally, Zoho Inventory, Linnworks, SKULabs, and custom warehouse management systems via API. Real-time inventory sync eliminates overselling and manual reconciliation."},
+  {q:"What Core Web Vitals scores do your stores typically achieve?",a:"Our target on all builds is PageSpeed above 85 on mobile and above 90 on desktop, with all Core Web Vitals in the 'good' range — LCP under 2.5s, CLS below 0.1, FID under 100ms. We include a performance audit before handover."},
+  {q:"Can you build a subscription or recurring order system?",a:"Yes. We integrate Recharge (Shopify), WooCommerce Subscriptions, or custom subscription logic for headless builds — supporting trial periods, billing cycles, pause/resume, and dunning management for failed payments."},
+  {q:"How do you protect against security vulnerabilities?",a:"We conduct security audits covering SQL injection protection, XSS prevention, CSRF protection, secure API key management, SSL implementation, and payment data handling compliance following OWASP top-10 guidelines on all builds."},
+  {q:"Can you build a B2B wholesale section into my existing D2C store?",a:"Yes. We build B2B pricing tiers, wholesale account registration, minimum order enforcement, and custom catalog visibility rules into Shopify Plus and WooCommerce builds — serving both retail and wholesale customers from one platform."},
+  {q:"What happens if I want to add features after launch?",a:"We design our systems for extensibility. Adding features post-launch is straightforward on all our builds. Most clients retain us on a monthly basis for ongoing development. Everything is documented for smooth handover if you choose to bring development in-house later."}
+];
+
+const faqRE = [
+  {q:"What is IDX and do I need it?",a:"IDX (Internet Data Exchange) allows real estate websites to display MLS listing data. If you operate in the US market with MLS membership, IDX integration lets your site show the full local listing database — significantly increasing search value for buyers. We manage the full IDX setup and MLS compliance requirements."},
+  {q:"Can you integrate the website with our existing CRM?",a:"Yes. We integrate with HubSpot, Salesforce, Zoho, Follow Up Boss, LionDesk, and custom systems. Every lead captured on your site flows directly into your CRM with full attribution data — lead source, property reference, and agent assignment."},
+  {q:"How do you handle property listings that change frequently?",a:"We build listing management systems allowing your team to add, update, or remove listings from an admin portal without developer access. For IDX-connected sites, listings update automatically from the MLS feed with configurable refresh intervals."},
+  {q:"Can you build a property search portal serving multiple cities or regions?",a:"Yes. Multi-region portals with location-based search filtering, region-specific listing categories, and separate page architecture for each market are standard in our property platform builds."},
+  {q:"Do you build project microsites for new developments?",a:"Yes. We build high-impact project launch sites with floor plan viewers, unit availability tables, interest registration, reservation workflows, and marketing campaign integration."},
+  {q:"Can you integrate virtual tour platforms like Matterport?",a:"Yes. We integrate Matterport, 3DVista, and YouTube/Vimeo-based virtual tours directly into property listing templates with mobile-optimized viewing."},
+  {q:"How do you approach SEO for real estate websites?",a:"We implement location-specific page architecture, neighborhood and suburb landing pages, RealEstateListing Schema, LocalBusiness Schema, and URL structures designed for long-term organic traffic growth in specific geographic markets."},
+  {q:"Do you build Arabic or other language versions for Gulf clients?",a:"Yes. We build bilingual (Arabic/English) and multilingual real estate sites with RTL layout support, region-appropriate listing categories, and compliance-aware content structures for UAE, Saudi Arabia, and Qatar markets."},
+  {q:"Can AI lead qualification work for a high-volume inquiry environment?",a:"Yes — and it's particularly valuable there. Our AI qualification layer handles initial inquiry response 24/7, qualifies budget and timeline, and routes high-intent leads to agents during business hours. High-volume environments see the most significant efficiency gains."},
+  {q:"What ongoing support do you provide after the website launches?",a:"We offer tiered post-launch retainer agreements covering platform maintenance, feature development, CRM integration updates, IDX compliance management as MLS rules evolve, and performance monitoring."}
+];
+
+const faqSaaS = [
+  {q:"What is the difference between a SaaS website and a SaaS platform?",a:"A SaaS website is the marketing and acquisition layer — the public-facing site converting visitors to trials or demos. A SaaS platform is the actual application your customers log into. We build both, and ensure they are architecturally aligned — shared design systems, consistent brand experience, and connected data pipelines."},
+  {q:"Can you build our MVP within a defined budget and timeline?",a:"Yes. We define an MVP scope that validates core product value without building everything at once. We scope for resource constraints without compromising architectural quality — so you're not rebuilding six months later."},
+  {q:"How do you handle data security for a multi-tenant SaaS application?",a:"Tenant data isolation at the database level (row-level security or schema-level separation depending on scale), strict RBAC, encrypted data storage, audit logging, and penetration testing before launch. Security is designed at the architecture stage, not audited at the end."},
+  {q:"Can you build GDPR and data compliance features into our platform?",a:"Yes. For UK, EU, and Australian markets, we build data residency options, consent management, data export and deletion workflows, and privacy policy infrastructure compliant with GDPR and Australian Privacy Act requirements."},
+  {q:"How do you handle scale if our platform grows rapidly?",a:"We architect for horizontal scalability — containerized deployments, auto-scaling infrastructure, and stateless API design. Rapid growth should not require an architectural rebuild. We discuss target scale benchmarks in the discovery session and architect to exceed them."},
+  {q:"Do you build API documentation and developer portals?",a:"Yes. For SaaS products with public APIs or partner integration programs, we build OpenAPI-standard documentation, sandbox environments, and developer portal interfaces — enabling third-party developers to integrate with your platform."},
+  {q:"Can you improve our existing SaaS product rather than build from scratch?",a:"Yes. We conduct technical audits of existing platforms and take on refactoring, performance optimization, feature development, and infrastructure migration projects for established SaaS products."},
+  {q:"Can you build a white-label version of our SaaS product?",a:"Yes. Multi-tenant architecture with white-labeling — custom branding, custom domains, and hidden platform identity per tenant — is a standard capability in our SaaS builds."},
+  {q:"What billing systems do you work with?",a:"We primarily integrate Stripe and Paddle, and have experience with Chargebee, Recurly, and Zuora for enterprise billing scenarios including usage-based pricing, metered billing, and complex plan hierarchies."},
+  {q:"Do you provide post-launch development and infrastructure management?",a:"Yes. We offer ongoing engineering retainers covering feature development, infrastructure management, performance optimization, security patching, and platform evolution — with a dedicated point of contact."}
+];
+
+const faqEdu = [
+  {q:"Should we build our own LMS or use Teachable / Thinkific?",a:"Third-party platforms are appropriate for validating a course concept. When you have 500+ students, per-student fees become significant, and platform limitations around branding, data ownership, custom assessments, and integrations constrain growth. A custom LMS eliminates per-student costs and gives you complete control."},
+  {q:"Can you integrate live classes into the LMS?",a:"Yes. We integrate Zoom, Google Meet, or custom video conferencing with scheduled class calendars, automated reminders, attendance recording, and session recording storage — all accessible from the student dashboard."},
+  {q:"How do you handle certificate generation and verification?",a:"Automated certificate generation triggered on course completion, with unique verification links or QR codes enabling employers or institutions to verify credential authenticity digitally."},
+  {q:"Can you build a multi-instructor or multi-department platform?",a:"Yes. Multi-instructor platforms with instructor-specific dashboards, earnings tracking for revenue-sharing models, content approval workflows, and department-level administration are standard in our education builds."},
+  {q:"How do you protect course content from being downloaded or shared?",a:"HLS streaming with signed URLs (link sharing doesn't work externally), optional watermarking, disabled right-click on content, and session-based access controls. Our implementation for a pan-India coaching institute eliminated all content leakage incidents post-launch."},
+  {q:"Can the platform handle thousands of concurrent students during live sessions or exams?",a:"Yes. We architect for concurrent load using auto-scaling cloud infrastructure and CDN-based video delivery that maintains performance regardless of simultaneous session count."},
+  {q:"Do you build multilingual education platforms?",a:"Yes. Platforms supporting multiple languages with content segmentation by language, translated interface elements, and regional fee structures for institutions serving diverse student populations."},
+  {q:"Can we monetize with subscriptions, one-time purchases, or both?",a:"Yes. We build flexible monetization systems supporting one-time course purchases, subscription access to course libraries, cohort-based paid programs, and institutional or corporate licensing — with a unified admin interface."},
+  {q:"How do you integrate with existing school management or ERP systems?",a:"We build API integrations with common school management systems and develop custom integration layers for proprietary ERP systems using available API documentation or data export formats."},
+  {q:"What support is provided for ongoing content updates?",a:"We build content management interfaces allowing instructors and administrators to update courses, add lessons, modify assessments, and upload materials without developer involvement — and provide training at handover."}
+];
+
+const faqAI = [
+  {q:"Do I need to rebuild my website to add AI features?",a:"No. Most AI enhancements can be integrated into existing websites and software platforms through API connections and embedded components. We assess your current architecture and recommend the least disruptive integration path."},
+  {q:"Where is data processed when using AI features?",a:"By default, we use commercial LLM APIs (OpenAI, Anthropic). For clients with sensitive data privacy requirements, we deploy using private or on-premises AI models where data doesn't leave your environment. Data handling requirements are discussed in the discovery stage."},
+  {q:"How long does it take to build and launch an AI chatbot?",a:"A standard AI chatbot trained on your existing business content, integrated into your website, and tested thoroughly: 3–6 weeks depending on knowledge base scope and integration requirements."},
+  {q:"What makes your AI chatbots different from off-the-shelf solutions?",a:"Off-the-shelf products are generic. Our chatbots are trained on your specific business data and integrated with your specific systems — your CRM, inventory, booking system. They know your business, not the average business. RAG architecture ensures factual, accurate responses drawn from your actual content."},
+  {q:"Can AI really replace human customer support?",a:"AI automation is most effective at resolving the high-volume, low-complexity queries consuming disproportionate human support time — typically 60–75% of total ticket volume for e-commerce and SaaS companies. Human agents focus on complex, sensitive, or high-value interactions. The combination outperforms either alone."},
+  {q:"What is the typical ROI timeline for AI integration?",a:"Varies by business model and enhancement. AI customer support automation for a mid-size e-commerce brand typically reduces handling costs within 60–90 days. AI lead qualification for a real estate agency typically shows measurable conversion improvement within the first sales cycle."},
+  {q:"Can the AI lead qualification system integrate with our CRM?",a:"Yes. Qualified leads, scores, and full conversation transcripts are pushed to your CRM with configured field mapping. We integrate with HubSpot, Salesforce, Zoho, Follow Up Boss, and custom CRM systems."},
+  {q:"Do you provide training for our team on using the AI systems?",a:"Yes. All AI integrations include operational documentation, admin interface training, and a handover session. For voice agents and automation workflows, we provide modification guides so your team can update scripts and rules without developer involvement."}
+];
+
+const faqCost = [
+  {q:"How much does a project cost with Collabify Space?",a:"We provide scoped project estimates, not package prices. Costs are determined by your specific requirements — system complexity, number of integrations, design scope, and geographic markets served. We provide a detailed scope of work with a fixed cost estimate after every discovery session, at no charge for qualified projects."},
+  {q:"Do you offer fixed-price or time-and-materials engagements?",a:"We primarily work on fixed-price project contracts with a clearly defined scope of work. For ongoing post-launch development, we offer monthly retainer agreements at a fixed rate for a defined number of development hours. Time-and-materials is available for projects where scope cannot be fully defined upfront."},
+  {q:"What are your payment terms?",a:"Standard payment structure: 40% on project initiation, 30% at design sign-off, 30% on launch. For larger projects, milestone-based payment schedules are negotiated during engagement setup."},
+  {q:"Is there a discovery or consultation fee?",a:"We do not charge for initial discovery sessions on qualified projects. For projects requiring extensive upfront technical architecture design before a build commitment, a paid scoping engagement may be recommended — the cost of which is credited against the build project."},
+  {q:"Do you offer maintenance packages after launch?",a:"Yes. Post-launch retainer agreements covering security updates, platform maintenance, performance monitoring, minor content updates, and ongoing feature development. Retainer pricing is fixed monthly and scoped at engagement start."}
+];
+
+const faqTimeline = [
+  {q:"How long does a typical project take?",a:"Standard business website: 4–6 weeks. Custom e-commerce store: 8–12 weeks. Headless commerce or complex e-commerce: 14–20 weeks. Custom SaaS platform MVP: 16–24 weeks. Real estate portal with IDX/CRM: 12–18 weeks. Custom LMS or EdTech platform: 14–20 weeks. Timelines assume timely client feedback and content delivery at defined milestones."},
+  {q:"What can delay a project timeline?",a:"The most common causes: delayed client feedback on design or prototype reviews, late delivery of required content (copy, images, product data), scope changes after development begins, and third-party system delays such as payment gateway or MLS approvals. We mitigate these with structured milestone schedules and clearly defined client obligations in every engagement."},
+  {q:"Can you expedite a project if we have a hard deadline?",a:"In some cases, yes — with additional resource allocation. Expedited timeline feasibility is assessed case-by-case. We will not accept an expedited timeline that compromises quality. We will tell you clearly if a deadline is not achievable at quality."}
+];
+
+const faqIntl = [
+  {q:"How do you work with clients across different time zones?",a:"All project communication — design reviews, sprint updates, milestone sign-offs, and launch coordination — is structured to be asynchronous-friendly. Clients receive detailed written progress updates at each milestone. For synchronous meetings, we maintain overlap hours with US East/West Coast, UK, Australia, and Gulf Standard Time."},
+  {q:"Do you have experience with regulatory compliance in the UK, USA, or Australia?",a:"Yes. We've built systems compliant with GDPR (UK/EU), Australian Privacy Act, PCI DSS, US MLS/IDX display rules, and general data protection frameworks. We flag where clients need jurisdiction-specific legal advice that goes beyond our technical scope."},
+  {q:"How do you manage projects with stakeholders in multiple countries?",a:"We designate a single primary project contact on our side — a project manager who coordinates all communication, maintains the schedule, and escalates issues. We ask clients to designate a primary decision-maker with authority to approve milestones. Multi-stakeholder approval processes are the most common source of timeline friction — we design the approval workflow to minimize this."},
+  {q:"Do you handle currency and pricing for international clients?",a:"We work with clients across multiple currencies. Project pricing is discussed and agreed in the client's preferred currency at engagement start. We do not impose currency exchange risk on clients."}
+];
+
+const faqMaint = [
+  {q:"What happens after the project launches — do you disappear?",a:"No. Every project launch includes a 30-day post-launch support window as standard — covering bug fixes, minor adjustments, and monitoring. After this, clients either continue on a retainer or transition to a documented handover if they have an internal team."},
+  {q:"Can we manage the website ourselves after launch without a developer?",a:"Yes. We build all websites with content management interfaces allowing non-technical team members to update content, add posts, update product listings, and modify standard page content. We document what can be done without developer involvement and provide training at handover."},
+  {q:"What if we want to add new features six months after launch?",a:"We design systems for extensibility. Adding features post-launch is straightforward for all builds we deliver. Clients on retainer request feature development against available hours. Clients not on retainer can engage us for discrete feature projects."}
+];
+
+const faqSec = [
+  {q:"How do you approach security on the projects you build?",a:"Security is implemented at the architecture stage, not audited at the end. Measures include: HTTPS with correctly configured SSL, OWASP top-10 vulnerability protection, parameterized queries (SQL injection prevention), CSRF protection, secure API key management, rate limiting, role-based access control, encrypted data storage, and pre-launch penetration testing for high-risk systems."},
+  {q:"Are the websites you build GDPR compliant?",a:"For clients in GDPR-governed markets (UK, EU), we implement: cookie consent management, privacy policy integration, data processing records infrastructure, and right-to-deletion workflows. We advise clients to obtain legal counsel for the policy documentation layer — we handle the technical implementation."},
+  {q:"How do you handle payment data security?",a:"We never store raw payment card data on any system we build. All payment processing is handled through PCI DSS-certified payment processors (Stripe, Razorpay, etc.) with only tokenized references stored in our systems — eliminating the most significant category of payment data breach risk."}
+];
+
+const faqAIMain = [
+  {q:"Can AI be added to a website we did not build?",a:"Yes. Most AI enhancements — chatbots, lead qualification systems, customer support automation — can be integrated into existing websites and software platforms through API connections and embedded interface components. We conduct a brief technical assessment of your existing system before confirming feasibility."},
+  {q:"Is the AI trained on our specific business data?",a:"Yes. Chatbots and AI assistants we deploy use RAG (Retrieval-Augmented Generation) architecture — retrieving information from a knowledge base populated with your specific business content. They do not rely solely on generic LLM training."},
+  {q:"Where is our data processed when using AI features?",a:"By default, we use commercial large language model APIs (OpenAI, Anthropic). For clients with sensitive data privacy requirements, we offer deployment using private or on-premises AI models where data does not leave your environment."}
+];
+
+const faqTech = [
+  {q:"Do you lock us into proprietary technology?",a:"No. We build on open-source and widely-adopted technology stacks. You own your code, database, and infrastructure. We use no proprietary frameworks creating dependency on us. If you work with a different team in future, everything we build is documented and transferable."},
+  {q:"Which technology stack will you use for my project?",a:"Stack selection is recommendation-led, not default. We recommend based on your project requirements, scale targets, team capabilities, and long-term maintenance model. We explain our recommendation and rationale at the architecture stage."},
+  {q:"Do you manage hosting, or do we need to arrange it ourselves?",a:"Both options are available. We can provision and manage cloud hosting on AWS, Google Cloud, or DigitalOcean as part of the project — with infrastructure documentation and optional handover to your team. We also deploy to a hosting environment you already manage. For SaaS platforms, we recommend clients own their cloud infrastructure directly under their own account."},
+  {q:"What hosting infrastructure do you typically recommend?",a:"High-performance websites: Vercel or AWS Amplify with CloudFront CDN for frontend, managed database services. SaaS platforms: AWS EC2 with auto-scaling, RDS for relational data, S3 for media, CloudFront for CDN. E-commerce: Vercel (headless) or Shopify-managed hosting. We select based on traffic volume, geographic user distribution, and uptime requirements."},
+  {q:"Can you work with our existing systems and integrations?",a:"Yes. Integration with existing CRM, ERP, inventory management, analytics, and communication tools is standard in our project work. We review your current tool stack in discovery and map all required integrations before development begins."}
+];
+
+// ===== INJECT ALL FAQS =====
+function injectFaqs() {
+  document.getElementById('faq-ecom').innerHTML = buildFaq(faqEcom);
+  document.getElementById('faq-re').innerHTML = buildFaq(faqRE);
+  document.getElementById('faq-saas').innerHTML = buildFaq(faqSaaS);
+  document.getElementById('faq-edu').innerHTML = buildFaq(faqEdu);
+  document.getElementById('faq-ai').innerHTML = buildFaq(faqAI);
+
+  // Main FAQ page
+  document.getElementById('faq-cost').innerHTML = buildFaq(faqCost);
+  document.getElementById('faq-timeline').innerHTML = buildFaq(faqTimeline);
+  document.getElementById('faq-intl').innerHTML = buildFaq(faqIntl);
+  document.getElementById('faq-maint').innerHTML = buildFaq(faqMaint);
+  document.getElementById('faq-sec').innerHTML = buildFaq(faqSec);
+  document.getElementById('faq-ai-main').innerHTML = buildFaq(faqAIMain);
+  document.getElementById('faq-tech').innerHTML = buildFaq(faqTech);
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+  injectFooters();
+  injectFaqs();
+});
+</script>
+</body>
+</html>
