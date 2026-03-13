@@ -11,6 +11,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
     rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root {
@@ -218,6 +219,39 @@
       padding-top: 72px;
       min-height: 100vh;
     }
+
+    .page-hero {
+      position: relative;
+      background-image: url("./images/cart-bg.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      padding: 120px 0;
+      color: white;
+    }
+
+    .page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0,0,0,0.65);
+}
+
+.page-hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.page-hero::after{
+  content:"🛒";
+  position:absolute;
+  right:5%;
+  bottom:10%;
+  font-size:300px;
+  opacity:0.05;
+}
 
     .page.active {
       display: block;
@@ -592,13 +626,16 @@
     }
 
     .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 60% at 70% 50%, rgba(232, 255, 71, 0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(0, 229, 192, 0.05) 0%, transparent 60%);
-    }
-
+    position: absolute;
+    inset: 0;
+    background-image:
+      url('images/hero-cityscape.png'),
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(232,255,71,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(0,229,192,0.05) 0%, transparent 60%);
+  
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-attachment: fixed;
+  }
     .hero-grid-lines {
       position: absolute;
       inset: 0;
@@ -609,8 +646,8 @@
     }
 
     .hero h1 {
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      font-weight: 800;
+      font-size: clamp(2.8rem, 4vw, 5rem);
+      font-weight: 600;
       line-height: 1.05;
       letter-spacing: -0.04em;
       margin-bottom: 1.5rem;
@@ -660,6 +697,149 @@
       padding: 0.3rem 0.85rem;
       border-radius: 100px;
     }
+
+    .who-right{
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+
+/* BIG IMAGE BOX */
+
+.image-box{
+
+width:100%;
+height:320px;
+
+border-radius:16px;
+overflow:hidden;
+
+border:1px solid rgba(255,255,255,0.1);
+
+}
+
+.image-box img{
+
+width:100%;
+height:100%;
+object-fit:cover;
+
+}
+
+.content-box{
+
+width:100%;
+max-width:520px;   /* makes box bigger */
+
+background:rgba(12,14,22,0.85);
+
+border:1px solid rgba(255,255,255,0.08);
+
+padding:40px;
+
+border-radius:18px;
+
+backdrop-filter:blur(12px);
+
+box-shadow:0 10px 40px rgba(0,0,0,0.4);
+
+}
+
+.stats-grid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:22px;
+
+margin-top:30px;
+
+}
+
+.stat-card{
+
+padding:30px;
+
+border-radius:16px;
+
+background:rgba(20,22,35,0.85);
+
+border:1px solid rgba(255,255,255,0.08);
+
+transition:all 0.35s ease;
+
+cursor:pointer;
+
+text-align:center;
+
+}
+
+
+/* number */
+
+.stat-card h3{
+
+font-size:32px;
+
+color:#e8ff47;
+
+margin-bottom:6px;
+
+}
+
+
+/* label */
+
+.stat-card p{
+
+font-size:14px;
+
+color:rgba(255,255,255,0.6);
+
+}
+
+
+/* HOVER EFFECT */
+
+.stat-card:hover{
+
+transform:translateY(-8px) scale(1.05);
+
+border-color:#e8ff47;
+
+box-shadow:0 15px 35px rgba(232,255,71,0.25);
+
+background:rgba(30,32,45,0.95);
+
+}
+
+.stat-card::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+border-radius:16px;
+
+background:radial-gradient(circle at var(--x) var(--y),
+rgba(232,255,71,0.25),
+transparent 40%);
+
+opacity:0;
+
+transition:0.3s;
+
+}
+
+.stat-card:hover::before{
+
+opacity:1;
+
+}
 
     /* ===== SERVICE PAGE HERO ===== */
     .page-hero {
@@ -783,8 +963,72 @@
       margin-top: 1.5rem;
     }
 
+    /* ===== INDUSTRIES BACKGROUND SECTION ===== */
+
+.industry-bg {
+  position: relative;
+  background-color: var(--ink2);
+  background-image: url("images/Ecomers.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* overlay so text stays readable */
+.industry-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 12, 30, 0.85);
+}
+
+/* ensure content appears above overlay */
+.industry-bg .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* cards grid */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+/* cards */
+.card {
+  background: rgba(15, 18, 30, 0.8);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: 0.3s;
+}
+
+.card:hover {
+  border-color: rgba(232,255,71,0.4);
+  transform: translateY(-6px);
+}
+
+/* icon */
+.feature-icon {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+/* badge */
+.badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border: 1px solid rgba(232,255,71,0.3);
+  border-radius: 20px;
+  color: var(--accent);
+}
     /* ===== INDUSTRY STRIP ===== */
-    .industry-strip {
+    .industry-strip {   
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
@@ -816,6 +1060,482 @@
       font-size: 1.2rem;
     }
 
+
+    /* core Features grid */
+
+    .grid-3{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+margin-top:40px;
+}
+
+.card{
+height:260px;
+border-radius:16px;
+background-size:cover;
+background-position:center;
+position:relative;
+overflow:hidden;
+cursor:pointer;
+}
+
+/* dark overlay */
+
+.card::before{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.65);
+opacity:0;
+transition:0.4s;
+}
+
+/* content hidden */
+
+.content{
+position:absolute;
+bottom:20px;
+left:20px;
+right:20px;
+color:white;
+opacity:0;
+transform:translateY(20px);
+transition:0.4s;
+}
+
+.card:hover::before{
+opacity:1;
+}
+
+.card:hover .content{
+opacity:1;
+transform:translateY(0);
+}
+
+.feature-icon{
+font-size:26px;
+margin-bottom:10px;
+}
+
+/* images */
+
+.card1{
+background-image:url("./images/core-performance.png");
+}
+
+.card2{
+background-image:url("./images/core-multy.png");
+}
+
+.card3{
+background-image:url("./images/core-investors.png");
+}
+
+.card4{
+background-image:url("./images/core-security2.jpg");
+}
+
+.card5{
+background-image:url("./images/core-seo.jpg");
+}
+
+.card6{
+background-image:url("./images/core-ai.png");
+}
+
+/* who we build for section */
+
+.grid-3{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+margin-top:40px;
+}
+
+/* card */
+
+.card{
+height:260px;
+border-radius:16px;
+padding:30px;
+position:relative;
+overflow:hidden;
+cursor:pointer;
+background-size:cover;
+background-position:center;
+transition:transform .4s ease, box-shadow .4s ease;
+}
+
+/* dark overlay */
+
+.card::before{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.65);
+transition:.4s;
+}
+
+/* zoom effect */
+
+.card:hover{
+transform:scale(1.05);
+box-shadow:0 15px 40px rgba(204,255,0,0.25);
+}
+
+/* highlight */
+
+.card:hover::before{
+background:rgba(0,0,0,0.4);
+}
+
+/* content above image */
+
+.card *{
+position:relative;
+z-index:2;
+}
+
+/* images */
+
+.card1{
+background-image:url("./images/agencys.jpg");
+}
+
+.card2{
+background-image:url("./images/developers.jpg");
+}
+
+.card3{
+background-image:url("./images/portals.jpg");
+}
+
+
+/* AI SECTION BACKGROUND */
+
+.ai-section{
+
+background:
+linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.9)),
+url("./images/AI-Lead.jpg");
+
+background-size:cover;
+background-position:center;
+
+padding:70px;
+
+border-radius:20px;
+
+position:relative;
+
+overflow:hidden;
+}
+
+
+/* AI BLOCK */
+
+.ai-block{
+
+padding:35px;
+
+border-radius:16px;
+
+background:rgba(20,30,45,0.6);
+
+backdrop-filter:blur(10px);
+
+border:1px solid rgba(0,255,200,0.2);
+
+transition:all .4s ease;
+}
+
+
+/* HOVER EFFECT */
+
+.ai-block:hover{
+
+transform:translateY(-6px) scale(1.02);
+
+box-shadow:0 20px 60px rgba(0,255,200,0.25);
+
+border-color:rgba(0,255,200,0.5);
+}
+
+
+/* STATS GRID */
+
+.ai-stats{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:15px;
+
+margin-top:20px;
+}
+
+
+/* STAT BOX */
+
+.stat{
+
+padding:18px;
+
+border-radius:12px;
+
+background:rgba(0,229,192,0.06);
+
+text-align:center;
+
+transition:.3s;
+}
+
+
+/* STAT HOVER */
+
+.stat:hover{
+
+transform:scale(1.05);
+
+background:rgba(0,229,192,0.12);
+
+box-shadow:0 10px 30px rgba(0,229,192,0.25);
+}
+
+
+/* STAT NUMBER */
+
+.stat-number{
+
+font-size:28px;
+
+font-weight:800;
+
+color:#2fffd2;
+}
+
+
+/* TEXT */
+
+.stat-text{
+
+font-size:13px;
+
+color:#9ca3af;
+}
+
+
+      /*Market we've Build For section*/
+
+      .markets-box{
+
+      padding:40px;
+
+      border-radius:20px;
+
+      background:linear-gradient(
+      135deg,
+      rgba(30,40,60,0.8),
+      rgba(15,20,30,0.9)
+      );
+
+      border:1px solid rgba(255,255,255,0.08);
+
+      max-width:700px;
+
+      }
+
+
+      /* grid */
+
+      .markets{
+
+      display:flex;
+
+      flex-wrap:wrap;
+
+      gap:16px;
+
+      margin-top:20px;
+
+      }
+
+
+      /* button */
+
+      .market-btn{
+
+      padding:12px 26px;
+
+      border-radius:30px;
+
+      border:1px solid #7CFF00;
+
+      color:#c8ff45;
+
+      font-weight:600;
+
+      cursor:pointer;
+
+      transition:all .35s ease;
+
+      background:rgba(124,255,0,0.05);
+
+      }
+
+
+      /* hover animation */
+
+      .market-btn:hover{
+
+      transform:translateY(-4px) scale(1.08);
+
+      background:#7CFF00;
+
+      color:#0b0f19;
+
+      box-shadow:
+      0 8px 20px rgba(124,255,0,0.35),
+      0 0 25px rgba(124,255,0,0.5);
+
+      }
+
+
+      /* click animation */
+
+      .market-btn:active{
+
+      transform:scale(0.96);
+
+      }
+
+
+      /* CTA SECTION */
+
+.cta-section{
+
+padding:90px 8%;
+
+background:linear-gradient(90deg,#020617,#020f2b);
+
+}
+
+
+/* CONTAINER */
+
+.cta-container{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:70px;
+
+}
+
+
+/* LEFT TEXT */
+
+.cta-content{
+
+max-width:520px;
+
+}
+
+.cta-content h2{
+
+font-size:42px;
+
+margin-bottom:20px;
+
+}
+
+.cta-content p{
+
+color:rgba(255,255,255,0.65);
+
+line-height:1.7;
+
+margin-bottom:28px;
+
+}
+
+
+/* BUTTON */
+
+.btn-primary{
+
+display:inline-block;
+
+padding:14px 28px;
+
+background:#d9ff33;
+
+color:#000;
+
+font-weight:600;
+
+border-radius:12px;
+
+text-decoration:none;
+
+transition:all .3s ease;
+
+}
+
+.btn-primary:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 12px 35px rgba(217,255,51,0.4);
+
+}
+
+
+/* IMAGE CONTAINER */
+
+.cta-image{
+
+flex:1;
+
+border-radius:18px;
+
+overflow:hidden;
+
+position:relative;
+
+}
+
+
+/* IMAGE */
+
+.cta-image img{
+
+width:100%;
+
+display:block;
+
+border-radius:18px;
+
+transition:transform .6s ease, box-shadow .6s ease;
+
+}
+
+
+/* HOVER ZOOM */
+
+.cta-image:hover img{
+
+transform:scale(1.1);
+
+box-shadow:0 25px 70px rgba(0,255,200,0.25);
+
+}
+
     /* ===== AI FEATURE BLOCK ===== */
     .ai-block {
       background: linear-gradient(135deg, var(--ink2), var(--ink3));
@@ -840,6 +1560,167 @@
     .ai-block:hover {
       border-color: rgba(0, 229, 192, 0.3);
     }
+
+    /* STEP BOX */
+.step-box{
+transition: all 0.35s ease;
+padding:10px;
+border-radius:12px;
+cursor:pointer;
+}
+
+/* circle style */
+.step-box div:first-child{
+transition: all 0.35s ease;
+}
+
+/* hover effect */
+.step-box:hover{
+transform: translateY(-12px) scale(1.05);
+}
+
+/* circle highlight */
+.step-box:hover div:first-child{
+background: var(--accent);
+color:#000;
+box-shadow:0 0 20px var(--accent);
+border-color:var(--accent);
+}
+
+/* title highlight */
+.step-box:hover div:nth-child(2){
+color:var(--accent);
+}
+
+/* text highlight */
+.step-box:hover div:nth-child(3){
+color:#ffffff;
+}
+
+/* title highlight */
+.step-box:hover div:nth-child(4){
+color:var(--accent);
+}
+
+/* text highlight */
+.step-box:hover div:nth-child(5){
+color:#ffffff;
+}
+
+
+/*product features AI section design*/
+
+.product-section{
+
+padding:90px 8%;
+
+background:linear-gradient(90deg,#020617,#02122e);
+
+}
+
+/* layout */
+
+.product-container{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:70px;
+
+}
+
+/* image */
+
+.product-image{
+
+flex:1;
+
+border-radius:18px;
+
+overflow:hidden;
+
+}
+
+.product-image img{
+
+width:100%;
+
+display:block;
+
+border-radius:18px;
+
+transition:transform .6s ease, box-shadow .6s ease;
+
+}
+
+/* hover animation */
+
+.product-image:hover img{
+
+transform:scale(1.08);
+
+box-shadow:0 20px 60px rgba(0,255,200,0.25);
+
+}
+
+/* content */
+
+.product-content{
+
+flex:1;
+
+}
+
+.product-content h2{
+
+font-size:40px;
+
+margin-bottom:18px;
+
+}
+
+.product-content p{
+
+color:rgba(255,255,255,0.65);
+
+line-height:1.7;
+
+margin-bottom:28px;
+
+}
+
+/* button */
+
+.product-btn{
+
+display:inline-block;
+
+padding:14px 28px;
+
+background:#d9ff33;
+
+color:#000;
+
+font-weight:600;
+
+border-radius:12px;
+
+text-decoration:none;
+
+transition:.3s;
+
+}
+
+.product-btn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 12px 35px rgba(217,255,51,0.4);
+
+}
 
     .ai-icon {
       width: 52px;
@@ -917,6 +1798,51 @@
       }
     }
 
+
+      .cta-section{
+padding:100px 0;
+background:linear-gradient(180deg,#020617,#030b1c);
+}
+
+.cta-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+}
+
+/* IMAGE */
+
+.cta-image img{
+width:100%;
+border-radius:18px;
+box-shadow:0 20px 50px rgba(0,0,0,.5);
+transition:.4s;
+}
+
+.cta-image img:hover{
+transform:scale(1.05);
+}
+
+/* CONTENT */
+
+.cta-content h2{
+font-size:2.8rem;
+margin:15px 0;
+}
+
+.cta-content p{
+color:rgba(255,255,255,0.65);
+line-height:1.7;
+margin-bottom:30px;
+max-width:520px;
+}
+
+.cta-buttons{
+display:flex;
+gap:16px;
+flex-wrap:wrap;
+}
     /* ===== ANIMATIONS ===== */
     @keyframes fadeUp {
       from {
@@ -1537,51 +2463,41 @@
               </div>
             </div>
           </div>
-          <div>
-            <div
-              style="padding:2rem;background:var(--ink2);border:1px solid var(--border);border-radius:var(--radius-lg);">
-              <div style="margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);">
-                <div
-                  style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;">
-                  We Are NOT</div>
-                <div style="display:flex;flex-direction:column;gap:0.5rem;">
-                  <span style="font-size:0.9rem;color:rgba(255,255,255,0.4);text-decoration:line-through;">A cheap
-                    outsourcing agency</span>
-                  <span style="font-size:0.9rem;color:rgba(255,255,255,0.4);text-decoration:line-through;">A freelancer
-                    collective</span>
-                  <span style="font-size:0.9rem;color:rgba(255,255,255,0.4);text-decoration:line-through;">A generic web
-                    developer</span>
-                </div>
-              </div>
-              <div>
-                <div
-                  style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;">
-                  We ARE</div>
-                <div style="display:flex;flex-direction:column;gap:0.75rem;">
-                  <div style="display:flex;align-items:center;gap:0.75rem;">
-                    <span style="color:var(--accent);font-size:1.1rem;">✓</span>
-                    <span style="font-size:0.9rem;color:rgba(255,255,255,0.8);">A digital infrastructure partner</span>
-                  </div>
-                  <div style="display:flex;align-items:center;gap:0.75rem;">
-                    <span style="color:var(--accent);font-size:1.1rem;">✓</span>
-                    <span style="font-size:0.9rem;color:rgba(255,255,255,0.8);">An AI-enabled development company</span>
-                  </div>
-                  <div style="display:flex;align-items:center;gap:0.75rem;">
-                    <span style="color:var(--accent);font-size:1.1rem;">✓</span>
-                    <span style="font-size:0.9rem;color:rgba(255,255,255,0.8);">A revenue-focused engineering
-                      team</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+         <div class="who-right">
+
+  <!-- IMAGE BOX -->
+  <div class="image-box">
+      <img src="images/image.png" alt="team working">
+  </div>
+
+  <!-- CONTENT BOX -->
+  <div class="content-box">
+
+      <div class="not-title">WE ARE NOT</div>
+
+      <p class="not">A cheap outsourcing agency</p>
+      <p class="not">A freelancer collective</p>
+      <p class="not">A generic web developer</p>
+      <br>
+      <hr>
+      <br>
+
+      <div class="are-title">WE ARE</div>
+
+      <div class="check">✓ A digital infrastructure partner</div>
+      <div class="check">✓ An AI-enabled development company</div>
+      <div class="check">✓ A revenue-focused engineering team</div>
+
+  </div>
+
+</div>
         </div>
       </div>
     </section>
 
     <!-- INDUSTRIES -->
     <section class="section"
-      style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+      style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);background-image: url(images/Ecomers.png);">
       <div class="container">
         <div style="text-align:center;margin-bottom:4rem;">
           <span class="label">Our Specializations</span>
@@ -1590,7 +2506,7 @@
         <div class="grid-2">
           <div class="card" onclick="showPage('ecommerce')" style="cursor:pointer;">
             <div class="feature-icon">🛒</div>
-            <div class="badge" style="margin-bottom:1rem;">E-Commerce</div>
+            <div class="badge" style="margin-bottom:1rem; background-image: url(images/Ecomers.png);">E-Commerce</div>
             <h3 style="font-size:1.4rem;margin-bottom:0.75rem;">E-Commerce Website Development</h3>
             <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;line-height:1.7;margin-bottom:1.5rem;">
               High-performance online stores on Shopify, WooCommerce, or custom headless architecture — engineered for
@@ -1683,7 +2599,7 @@
           <div
             style="position:absolute;top:30px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.3;">
           </div>
-          <div style="text-align:center;position:relative;">
+          <div class="step-box" style="text-align:center;position:relative;">
             <div
               style="width:60px;height:60px;border-radius:50%;background:rgba(232,255,71,0.1);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:var(--accent);">
               01</div>
@@ -1691,34 +2607,34 @@
               Discovery</div>
             <div style="font-size:0.78rem;color:var(--muted);">Business goals, tech audit, scope</div>
           </div>
-          <div style="text-align:center;position:relative;">
+          <div class="step-box" style="text-align:center;position:relative;">
             <div
-              style="width:60px;height:60px;border-radius:50%;background:rgba(232,255,71,0.08);border:1px solid rgba(232,255,71,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:rgba(232,255,71,0.6);">
+               style="width:60px;height:60px;border-radius:50%;background:rgba(232,255,71,0.1);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:var(--accent);">
               02</div>
             <div style="font-family:var(--font-display);font-weight:700;font-size:0.9rem;margin-bottom:0.4rem;">
               Architecture</div>
             <div style="font-size:0.78rem;color:var(--muted);">System design before any code</div>
           </div>
-          <div style="text-align:center;position:relative;">
+          <div class="step-box" style="text-align:center;position:relative;">
             <div
-              style="width:60px;height:60px;border-radius:50%;background:rgba(232,255,71,0.08);border:1px solid rgba(232,255,71,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:rgba(232,255,71,0.6);">
+                 style="width:60px;height:60px;border-radius:50%;background:rgba(232,255,71,0.1);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:var(--accent);">
               03</div>
             <div style="font-family:var(--font-display);font-weight:700;font-size:0.9rem;margin-bottom:0.4rem;">
               Development</div>
             <div style="font-size:0.78rem;color:var(--muted);">Sprint-based with weekly updates</div>
           </div>
-          <div style="text-align:center;position:relative;">
+          <div class="step-box" style="text-align:center;position:relative;">
             <div
-              style="width:60px;height:60px;border-radius:50%;background:rgba(232,255,71,0.08);border:1px solid rgba(232,255,71,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:rgba(232,255,71,0.6);">
-              04</div>
+                 style="width:60px;height:60px;border-radius:50%;background:rgba(232,255,71,0.1);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:var(--accent);">        
+               04</div>
             <div style="font-family:var(--font-display);font-weight:700;font-size:0.9rem;margin-bottom:0.4rem;">QA &
               Security</div>
             <div style="font-size:0.78rem;color:var(--muted);">Full audit before launch</div>
           </div>
-          <div style="text-align:center;position:relative;">
+          <div class="step-box" style="text-align:center;position:relative;">
             <div
-              style="width:60px;height:60px;border-radius:50%;background:rgba(232,255,71,0.08);border:1px solid rgba(232,255,71,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:rgba(232,255,71,0.6);">
-              05</div>
+                 style="width:60px;height:60px;border-radius:50%;background:rgba(232,255,71,0.1);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:var(--accent);">
+               05</div>
             <div style="font-family:var(--font-display);font-weight:700;font-size:0.9rem;margin-bottom:0.4rem;">Launch &
               Support</div>
             <div style="font-size:0.78rem;color:var(--muted);">Training & ongoing retainer</div>
@@ -1728,7 +2644,7 @@
     </section>
 
     <!-- FAQ SNIPPET -->
-    <section class="section">
+    <section class="section" style="background-image: url(images/quick-answers.png); background-size: 60%;">
       <div class="container">
         <div style="display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:start;">
           <div>
@@ -1769,18 +2685,40 @@
 
     <!-- CTA -->
     <div class="cta-section" id="home-cta">
-      <div class="container" style="position:relative;z-index:1;">
-        <span class="label" style="display:block;text-align:center;">Ready to Start?</span>
-        <h2 style="font-size:2.8rem;margin-bottom:1.25rem;">Build Something That Works</h2>
-        <p style="color:rgba(255,255,255,0.6);max-width:500px;margin:0 auto 2.5rem;line-height:1.7;">If your current
-          website is not generating leads, converting visitors, or scaling with your business — it's an infrastructure
-          problem. Let us audit and fix it.</p>
-        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-          <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Book a Strategy Call →</a>
-          <a class="btn btn-outline" onclick="showPage('casestudies')">View Our Work</a>
-        </div>
+
+  <div class="container cta-grid">
+
+    <!-- LEFT IMAGE -->
+    <div class="cta-image">
+      <img src="images/ready-to-work.png" alt="Team working on digital project">
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="cta-content">
+      <span class="label">Ready to Start?</span>
+
+      <h2>Build Something That Works</h2>
+
+      <p>
+        If your current website is not generating leads, converting visitors,
+        or scaling with your business — it's an infrastructure problem.
+        Let us audit and fix it.
+      </p>
+
+      <div class="cta-buttons">
+        <a class="btn btn-primary" href="mailto:team@collabifyspace.com">
+          Book a Strategy Call →
+        </a>
+
+        <a class="btn btn-outline" onclick="showPage('casestudies')">
+          View Our Work
+        </a>
       </div>
     </div>
+
+  </div>
+
+</div>
 
     <!-- FOOTER -->
     <footer>
@@ -1856,276 +2794,292 @@
   <!-- ================================================================ -->
   <!-- PAGE: E-COMMERCE -->
   <!-- ================================================================ -->
-  <div class="page" id="page-ecommerce">
-    <div class="page-hero">
-      <div class="container">
-        <span class="label">E-Commerce Development</span>
-        <div class="hero-tag">Shopify · WooCommerce · Headless · Custom</div>
-        <h1>E-Commerce Website Development That Converts Browsers Into Buyers</h1>
-        <p>We build online stores designed around your customer's purchase journey — from single-product DTC brands to
-          multi-category marketplaces engineered for performance, scalability, and revenue growth.</p>
-        <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
-          <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Start Your Project →</a>
-          <a class="btn btn-outline" onclick="showPage('casestudies')">See Case Studies</a>
+  
+    <div class="page" id="page-ecommerce">
+      <div class="page-hero" style="background-image: url('images/Ecomers.png');">
+        <div class="container">
+          <span class="label">E-Commerce Development</span>
+          <div class="hero-tag">Shopify · WooCommerce · Headless · Custom</div>
+          <h1>E-Commerce Website Development That Converts Browsers Into Buyers</h1>
+          <p>We build online stores designed around your customer's purchase journey — from single-product DTC brands to
+            multi-category marketplaces engineered for performance, scalability, and revenue growth.</p>
+          <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+            <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Start Your Project →</a>
+            <a class="btn btn-outline" onclick="showPage('casestudies')">See Case Studies</a>
+          </div>
         </div>
       </div>
+      
+      <section class="section" style="background-image: url(images/the-real-problem1.png);">
+        <div class="container">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;">
+            <div>
+              <div>
+                <span class="label">The Real Problem</span>
+                <h2 style="font-size:2rem;margin-bottom:1.25rem;">Why Most E-Commerce Stores Fail to Convert</h2>
+                <p style="color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:1rem;">Slow load times, poor mobile
+                  UX, broken checkout flows, and backend systems that don't sync in real time — these are infrastructure
+                  failures dressed up as marketing problems.</p>
+                <p style="color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:1.5rem;">Generic templates built for
+                  everything serve no one well. Your store needs to be built around your product catalog, your customer's
+                  behavior, and your target market's payment preferences.</p>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                  <div
+                    style="padding:1rem;background:rgba(255,59,48,0.06);border:1px solid rgba(255,59,48,0.15);border-radius:10px;">
+                    <div style="font-size:1.8rem;font-weight:800;font-family:var(--font-display);color:#ff6b6b;">70%</div>
+                    <div style="font-size:0.8rem;color:var(--muted);">Cart abandonment from checkout friction</div>
+                  </div>
+                  <div
+                    style="padding:1rem;background:rgba(255,59,48,0.06);border:1px solid rgba(255,59,48,0.15);border-radius:10px;">
+                    <div style="font-size:1.8rem;font-weight:800;font-family:var(--font-display);color:#ff6b6b;">8s</div>
+                    <div style="font-size:0.8rem;color:var(--muted);">Average load time kills mobile conversions</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="label">Platform Selection</span>
+              <h2 style="font-size:2rem;margin-bottom:1.25rem;">We Recommend the Right Platform for Your Model</h2>
+              <div style="display:flex;flex-direction:column;gap:1rem;">
+                <div style="padding:1.25rem;background:var(--ink2);border:1px solid var(--border);border-radius:12px;">
+                  <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.4rem;">Shopify / Shopify
+                    Plus</div>
+                  <div style="font-size:0.85rem;color:var(--muted);">Best for speed-to-market, subscriptions, and
+                    international multi-currency stores</div>
+                </div>
+                <div style="padding:1.25rem;background:var(--ink2);border:1px solid var(--border);border-radius:12px;">
+                  <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.4rem;">WooCommerce</div>
+                  <div style="font-size:0.85rem;color:var(--muted);">Best for deep content integration, complex
+                    configurators, heavy customization</div>
+                </div>
+                <div
+                  style="padding:1.25rem;background:var(--ink2);border:1px solid rgba(232,255,71,0.2);border-radius:12px;">
+                  <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.4rem;">Custom Headless
+                    Commerce <span class="badge" style="margin-left:0.5rem;">Recommended</span></div>
+                  <div style="font-size:0.85rem;color:var(--muted);">Next.js frontend + commerce API for maximum
+                    performance and unique UX</div>
+                </div>
+                <div style="padding:1.25rem;background:var(--ink2);border:1px solid var(--border);border-radius:12px;">
+                  <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.4rem;">Magento / Adobe
+                    Commerce</div>
+                  <div style="font-size:0.85rem;color:var(--muted);">Enterprise catalogs with B2B pricing, multi-store,
+                    and ERP integrations</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURES -->
+      <section class="section"
+        style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+        <div class="container">
+          <div style="text-align:center;margin-bottom:3rem;">
+            <span class="label">Core Features</span>
+            <h2 style="font-size:2.2rem;">What We Build Into Every Store</h2>
+          </div>
+          <div class="grid-3">
+            <div class="card card1">
+              <div class="content">
+              <div class="feature-icon">⚡</div>
+              <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Performance Engineering</h3>
+              <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">LCP under 2.5s, CLS below 0.1, FID under
+                100ms. Core Web Vitals optimization is non-negotiable on every build we deliver.</p>
+              </div>
+            </div>
+            <div class="card card2">
+              <div class="content">
+              <div class="feature-icon">🌍</div>
+              <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Multi-Currency & Multi-Region</h3>
+              <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Geolocation-based currency, regional
+                pricing, localized payment gateways, and shipping zone configuration for global brands.</p>
+              </div>
+            </div>
+            <div class="card card3">
+              <div class="content">
+              <div class="feature-icon">🔗</div>
+              <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Inventory & ERP Integration</h3>
+              <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Real-time sync with inventory management
+                (Linnworks, SKULabs), dropshipping supplier APIs, and warehouse management systems.</p>
+              </div>
+            </div>
+            <div class="card card4">
+              <div class="content">
+              <div class="feature-icon">🛡️</div>
+              <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Security & PCI Compliance</h3>
+              <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">OWASP top-10 protection, SSL, secure API
+                key management, CSRF prevention, and PCI DSS-compliant payment handling.</p>
+              </div>
+            </div>
+            <div class="card card5">
+              <div class="content">
+              <div class="feature-icon">🔍</div>
+              <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">SEO Architecture</h3>
+              <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Product Schema, canonical URLs, faceted
+                navigation handled correctly, XML sitemaps, and page-level meta management to drive organic traffic.</p>
+              </div>
+            </div>
+            <div class="card card6">
+              <div class="content">
+              <div class="feature-icon">🤖</div>
+              <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">AI-Powered Recommendations</h3>
+              <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Product recommendation engines, AI search
+                with natural language queries, and AI chatbots that reduce support load by 40–60%.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TECH STACK -->
+      <section class="section">
+        <div class="container">
+          <span class="label">Technology Stack</span>
+          <h2 style="font-size:2rem;margin-bottom:2rem;">What We Build With</h2>
+          <div style="display:flex;flex-direction:column;gap:1.25rem;">
+            <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+              <span
+                style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0;">Frontend</span>
+              <span class="tech-pill">Next.js</span><span class="tech-pill">React</span><span class="tech-pill">Liquid
+                (Shopify)</span><span class="tech-pill">Gutenberg</span>
+            </div>
+            <div class="divider"></div>
+            <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+              <span
+                style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0;">Backend</span>
+              <span class="tech-pill">Node.js</span><span class="tech-pill">PHP Laravel</span><span
+                class="tech-pill">Python</span>
+            </div>
+            <div class="divider"></div>
+            <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+              <span
+                style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0;">Platforms</span>
+              <span class="tech-pill">Shopify Plus</span><span class="tech-pill">WooCommerce</span><span
+                class="tech-pill">Medusa.js</span><span class="tech-pill">Magento</span>
+            </div>
+            <div class="divider"></div>
+            <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+              <span
+                style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0;">Payments</span>
+              <span class="tech-pill">Stripe</span><span class="tech-pill">Razorpay</span><span
+                class="tech-pill">PayPal</span><span class="tech-pill">Afterpay</span><span class="tech-pill">Tabby
+                (BNPL)</span>
+            </div>
+            <div class="divider"></div>
+            <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+              <span
+                style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0;">Search
+                & CDN</span>
+              <span class="tech-pill">Algolia</span><span class="tech-pill">Elasticsearch</span><span
+                class="tech-pill">Cloudflare</span><span class="tech-pill">AWS CloudFront</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TIMELINE -->
+      <section class="section"
+        style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+        <div class="container">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;">
+            <div>
+              <span class="label">Development Process</span>
+              <h2 style="font-size:2rem;margin-bottom:2rem;">How We Build Your Store</h2>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-week">Week 1–2</div>
+                  <div class="timeline-step">Discovery & Technical Scoping</div>
+                  <div class="timeline-desc">Catalog audit, platform selection, integration mapping, competitor analysis,
+                    conversion benchmark review.</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-week">Week 2–4</div>
+                  <div class="timeline-step">UX Design & Prototype</div>
+                  <div class="timeline-desc">Wireframes and interactive prototypes: homepage, collections, product detail,
+                    cart, and checkout.</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-week">Week 4–12</div>
+                  <div class="timeline-step">Development & Integration</div>
+                  <div class="timeline-desc">Frontend and backend in parallel sprints. Payment, API integrations, and
+                    performance optimization.</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-week">Week 12–14</div>
+                  <div class="timeline-step">QA & Security Review</div>
+                  <div class="timeline-desc">Load testing, cross-device QA, security audit, and final performance
+                    benchmarking.</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-week">Week 14–16</div>
+                  <div class="timeline-step">Launch & Post-Launch Monitoring</div>
+                  <div class="timeline-desc">Staged launch, traffic monitoring, error logging review, and 30-day
+                    post-launch support.</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="label">Timeline & Investment</span>
+              <h2 style="font-size:2rem;margin-bottom:2rem;">What to Expect</h2>
+              <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;">
+                <div
+                  style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;display:flex;justify-content:space-between;align-items:center;">
+                  <span style="font-size:0.9rem;">Shopify / WooCommerce Store</span>
+                  <span class="badge">8–12 weeks</span>
+                </div>
+                <div
+                  style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;display:flex;justify-content:space-between;align-items:center;">
+                  <span style="font-size:0.9rem;">Custom Headless Commerce</span>
+                  <span class="badge">14–20 weeks</span>
+                </div>
+                <div
+                  style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;display:flex;justify-content:space-between;align-items:center;">
+                  <span style="font-size:0.9rem;">Marketplace / Multi-Vendor</span>
+                  <span class="badge">20–28 weeks</span>
+                </div>
+              </div>
+              <div
+                style="padding:1.5rem;background:rgba(232,255,71,0.06);border:1px solid rgba(232,255,71,0.2);border-radius:12px;">
+                <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.5rem;">Investment Structure
+                </div>
+                <p style="font-size:0.88rem;color:rgba(255,255,255,0.6);line-height:1.7;">We provide scoped project
+                  estimates — not package pricing. Investments are sized to project complexity and revenue impact
+                  potential. Discovery sessions are free for qualified projects.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ E-COMMERCE -->
+      <section class="section">
+        <div class="container">
+          <div style="max-width:760px;margin:0 auto;">
+            <span class="label">FAQ</span>
+            <h2 style="font-size:2rem;margin-bottom:2.5rem;">E-Commerce Questions Answered</h2>
+            <div id="faq-ecom"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="cta-section">
+        <div class="container" style="position:relative;z-index:1;">
+          <h2 style="font-size:2.5rem;margin-bottom:1rem;">Build a Store Designed to Convert</h2>
+          <p style="color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 2rem;">If your store isn't performing at the
+            level your product deserves, the problem is almost certainly architectural.</p>
+          <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Get a Technical Audit →</a>
+        </div>
+      </div>
+      <div id="ecom-footer"></div>
     </div>
-
-    <section class="section">
-      <div class="container">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;">
-          <div>
-            <span class="label">The Real Problem</span>
-            <h2 style="font-size:2rem;margin-bottom:1.25rem;">Why Most E-Commerce Stores Fail to Convert</h2>
-            <p style="color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:1rem;">Slow load times, poor mobile
-              UX, broken checkout flows, and backend systems that don't sync in real time — these are infrastructure
-              failures dressed up as marketing problems.</p>
-            <p style="color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:1.5rem;">Generic templates built for
-              everything serve no one well. Your store needs to be built around your product catalog, your customer's
-              behavior, and your target market's payment preferences.</p>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-              <div
-                style="padding:1rem;background:rgba(255,59,48,0.06);border:1px solid rgba(255,59,48,0.15);border-radius:10px;">
-                <div style="font-size:1.8rem;font-weight:800;font-family:var(--font-display);color:#ff6b6b;">70%</div>
-                <div style="font-size:0.8rem;color:var(--muted);">Cart abandonment from checkout friction</div>
-              </div>
-              <div
-                style="padding:1rem;background:rgba(255,59,48,0.06);border:1px solid rgba(255,59,48,0.15);border-radius:10px;">
-                <div style="font-size:1.8rem;font-weight:800;font-family:var(--font-display);color:#ff6b6b;">8s</div>
-                <div style="font-size:0.8rem;color:var(--muted);">Average load time kills mobile conversions</div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <span class="label">Platform Selection</span>
-            <h2 style="font-size:2rem;margin-bottom:1.25rem;">We Recommend the Right Platform for Your Model</h2>
-            <div style="display:flex;flex-direction:column;gap:1rem;">
-              <div style="padding:1.25rem;background:var(--ink2);border:1px solid var(--border);border-radius:12px;">
-                <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.4rem;">Shopify / Shopify
-                  Plus</div>
-                <div style="font-size:0.85rem;color:var(--muted);">Best for speed-to-market, subscriptions, and
-                  international multi-currency stores</div>
-              </div>
-              <div style="padding:1.25rem;background:var(--ink2);border:1px solid var(--border);border-radius:12px;">
-                <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.4rem;">WooCommerce</div>
-                <div style="font-size:0.85rem;color:var(--muted);">Best for deep content integration, complex
-                  configurators, heavy customization</div>
-              </div>
-              <div
-                style="padding:1.25rem;background:var(--ink2);border:1px solid rgba(232,255,71,0.2);border-radius:12px;">
-                <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.4rem;">Custom Headless
-                  Commerce <span class="badge" style="margin-left:0.5rem;">Recommended</span></div>
-                <div style="font-size:0.85rem;color:var(--muted);">Next.js frontend + commerce API for maximum
-                  performance and unique UX</div>
-              </div>
-              <div style="padding:1.25rem;background:var(--ink2);border:1px solid var(--border);border-radius:12px;">
-                <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.4rem;">Magento / Adobe
-                  Commerce</div>
-                <div style="font-size:0.85rem;color:var(--muted);">Enterprise catalogs with B2B pricing, multi-store,
-                  and ERP integrations</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURES -->
-    <section class="section"
-      style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-      <div class="container">
-        <div style="text-align:center;margin-bottom:3rem;">
-          <span class="label">Core Features</span>
-          <h2 style="font-size:2.2rem;">What We Build Into Every Store</h2>
-        </div>
-        <div class="grid-3">
-          <div class="card">
-            <div class="feature-icon">⚡</div>
-            <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Performance Engineering</h3>
-            <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">LCP under 2.5s, CLS below 0.1, FID under
-              100ms. Core Web Vitals optimization is non-negotiable on every build we deliver.</p>
-          </div>
-          <div class="card">
-            <div class="feature-icon">🌍</div>
-            <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Multi-Currency & Multi-Region</h3>
-            <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Geolocation-based currency, regional
-              pricing, localized payment gateways, and shipping zone configuration for global brands.</p>
-          </div>
-          <div class="card">
-            <div class="feature-icon">🔗</div>
-            <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Inventory & ERP Integration</h3>
-            <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Real-time sync with inventory management
-              (Linnworks, SKULabs), dropshipping supplier APIs, and warehouse management systems.</p>
-          </div>
-          <div class="card">
-            <div class="feature-icon">🛡️</div>
-            <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Security & PCI Compliance</h3>
-            <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">OWASP top-10 protection, SSL, secure API
-              key management, CSRF prevention, and PCI DSS-compliant payment handling.</p>
-          </div>
-          <div class="card">
-            <div class="feature-icon">🔍</div>
-            <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">SEO Architecture</h3>
-            <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Product Schema, canonical URLs, faceted
-              navigation handled correctly, XML sitemaps, and page-level meta management to drive organic traffic.</p>
-          </div>
-          <div class="card">
-            <div class="feature-icon">🤖</div>
-            <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">AI-Powered Recommendations</h3>
-            <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Product recommendation engines, AI search
-              with natural language queries, and AI chatbots that reduce support load by 40–60%.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TECH STACK -->
-    <section class="section">
-      <div class="container">
-        <span class="label">Technology Stack</span>
-        <h2 style="font-size:2rem;margin-bottom:2rem;">What We Build With</h2>
-        <div style="display:flex;flex-direction:column;gap:1.25rem;">
-          <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
-            <span
-              style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0;">Frontend</span>
-            <span class="tech-pill">Next.js</span><span class="tech-pill">React</span><span class="tech-pill">Liquid
-              (Shopify)</span><span class="tech-pill">Gutenberg</span>
-          </div>
-          <div class="divider"></div>
-          <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
-            <span
-              style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0;">Backend</span>
-            <span class="tech-pill">Node.js</span><span class="tech-pill">PHP Laravel</span><span
-              class="tech-pill">Python</span>
-          </div>
-          <div class="divider"></div>
-          <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
-            <span
-              style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0;">Platforms</span>
-            <span class="tech-pill">Shopify Plus</span><span class="tech-pill">WooCommerce</span><span
-              class="tech-pill">Medusa.js</span><span class="tech-pill">Magento</span>
-          </div>
-          <div class="divider"></div>
-          <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
-            <span
-              style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0;">Payments</span>
-            <span class="tech-pill">Stripe</span><span class="tech-pill">Razorpay</span><span
-              class="tech-pill">PayPal</span><span class="tech-pill">Afterpay</span><span class="tech-pill">Tabby
-              (BNPL)</span>
-          </div>
-          <div class="divider"></div>
-          <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
-            <span
-              style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0;">Search
-              & CDN</span>
-            <span class="tech-pill">Algolia</span><span class="tech-pill">Elasticsearch</span><span
-              class="tech-pill">Cloudflare</span><span class="tech-pill">AWS CloudFront</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TIMELINE -->
-    <section class="section"
-      style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-      <div class="container">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;">
-          <div>
-            <span class="label">Development Process</span>
-            <h2 style="font-size:2rem;margin-bottom:2rem;">How We Build Your Store</h2>
-            <div class="timeline">
-              <div class="timeline-item">
-                <div class="timeline-week">Week 1–2</div>
-                <div class="timeline-step">Discovery & Technical Scoping</div>
-                <div class="timeline-desc">Catalog audit, platform selection, integration mapping, competitor analysis,
-                  conversion benchmark review.</div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-week">Week 2–4</div>
-                <div class="timeline-step">UX Design & Prototype</div>
-                <div class="timeline-desc">Wireframes and interactive prototypes: homepage, collections, product detail,
-                  cart, and checkout.</div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-week">Week 4–12</div>
-                <div class="timeline-step">Development & Integration</div>
-                <div class="timeline-desc">Frontend and backend in parallel sprints. Payment, API integrations, and
-                  performance optimization.</div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-week">Week 12–14</div>
-                <div class="timeline-step">QA & Security Review</div>
-                <div class="timeline-desc">Load testing, cross-device QA, security audit, and final performance
-                  benchmarking.</div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-week">Week 14–16</div>
-                <div class="timeline-step">Launch & Post-Launch Monitoring</div>
-                <div class="timeline-desc">Staged launch, traffic monitoring, error logging review, and 30-day
-                  post-launch support.</div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <span class="label">Timeline & Investment</span>
-            <h2 style="font-size:2rem;margin-bottom:2rem;">What to Expect</h2>
-            <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;">
-              <div
-                style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;display:flex;justify-content:space-between;align-items:center;">
-                <span style="font-size:0.9rem;">Shopify / WooCommerce Store</span>
-                <span class="badge">8–12 weeks</span>
-              </div>
-              <div
-                style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;display:flex;justify-content:space-between;align-items:center;">
-                <span style="font-size:0.9rem;">Custom Headless Commerce</span>
-                <span class="badge">14–20 weeks</span>
-              </div>
-              <div
-                style="padding:1.25rem;background:var(--ink3);border:1px solid var(--border);border-radius:12px;display:flex;justify-content:space-between;align-items:center;">
-                <span style="font-size:0.9rem;">Marketplace / Multi-Vendor</span>
-                <span class="badge">20–28 weeks</span>
-              </div>
-            </div>
-            <div
-              style="padding:1.5rem;background:rgba(232,255,71,0.06);border:1px solid rgba(232,255,71,0.2);border-radius:12px;">
-              <div style="font-family:var(--font-display);font-weight:700;margin-bottom:0.5rem;">Investment Structure
-              </div>
-              <p style="font-size:0.88rem;color:rgba(255,255,255,0.6);line-height:1.7;">We provide scoped project
-                estimates — not package pricing. Investments are sized to project complexity and revenue impact
-                potential. Discovery sessions are free for qualified projects.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ E-COMMERCE -->
-    <section class="section">
-      <div class="container">
-        <div style="max-width:760px;margin:0 auto;">
-          <span class="label">FAQ</span>
-          <h2 style="font-size:2rem;margin-bottom:2.5rem;">E-Commerce Questions Answered</h2>
-          <div id="faq-ecom"></div>
-        </div>
-      </div>
-    </section>
-
-    <div class="cta-section">
-      <div class="container" style="position:relative;z-index:1;">
-        <h2 style="font-size:2.5rem;margin-bottom:1rem;">Build a Store Designed to Convert</h2>
-        <p style="color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 2rem;">If your store isn't performing at the
-          level your product deserves, the problem is almost certainly architectural.</p>
-        <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Get a Technical Audit →</a>
-      </div>
-    </div>
-    <div id="ecom-footer"></div>
-  </div>
+  </section>
 
   <!-- ================================================================ -->
   <!-- PAGE: REAL ESTATE -->
   <!-- ================================================================ -->
   <div class="page" id="page-realestate">
-    <div class="page-hero">
+    <div class="page-hero" style="background-image: url(images/real-estate.png);">
       <div class="container">
         <span class="label">Real Estate Development</span>
         <div class="hero-tag">IDX/MLS · CRM · AI Lead Qualification · Multi-Language</div>
@@ -2147,19 +3101,19 @@
           <h2 style="font-size:2.2rem;">Real Estate Businesses We Serve</h2>
         </div>
         <div class="grid-3">
-          <div class="card">
+          <div class="card card1">
             <div class="feature-icon">🏢</div>
             <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">Agencies & Brokerages</h3>
             <p style="font-size:0.85rem;color:var(--muted);line-height:1.6;">Multi-agent platforms for property
               listings, agent profiles, lead routing, and CRM integration — managing 20 to 20,000 listings.</p>
           </div>
-          <div class="card">
+          <div class="card card2">
             <div class="feature-icon">🏗️</div>
             <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">Property Developers</h3>
             <p style="font-size:0.85rem;color:var(--muted);line-height:1.6;">Project microsites with floor plan viewers,
               virtual tours, reservation systems, and launch campaign integrations.</p>
           </div>
-          <div class="card">
+          <div class="card card3">
             <div class="feature-icon">🌐</div>
             <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">Property Portals</h3>
             <p style="font-size:0.85rem;color:var(--muted);line-height:1.6;">Aggregator platforms where multiple
@@ -2224,7 +3178,7 @@
               </div>
             </div>
           </div>
-          <div>
+          <div class="ai-section">
             <span class="label">AI Integration</span>
             <h2 style="font-size:2rem;margin-bottom:1.25rem;">Turn Lead Volume Into a Qualified Pipeline</h2>
             <div class="ai-block" style="margin-bottom:1.5rem;">
@@ -2274,13 +3228,37 @@
     </section>
 
     <div class="cta-section">
-      <div class="container" style="position:relative;z-index:1;">
-        <h2 style="font-size:2.5rem;margin-bottom:1rem;">Your Website Should Be Your Best Agent</h2>
-        <p style="color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 2rem;">If your current site isn't qualifying
-          leads and converting traffic into appointments, it's underperforming at a cost to your business every day.</p>
-        <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Request a Real Estate Audit →</a>
-      </div>
-    </div>
+
+<div class="container cta-container">
+
+<!-- LEFT CONTENT -->
+
+<div class="cta-content">
+
+<h2>Your Website Should Be Your Best Agent</h2>
+
+<p>
+If your current site isn't qualifying leads and converting traffic
+into appointments, it's underperforming at a cost to your business every day.
+</p>
+
+<a class="btn btn-primary" href="mailto:team@collabifyspace.com">
+Request a Real Estate Audit →
+</a>
+
+</div>
+
+<!-- RIGHT IMAGE -->
+
+<div class="cta-image">
+
+<img src="./images/agents.jpg" alt="Real Estate Platform">
+
+</div>
+
+</div>
+
+</div>
     <div id="re-footer"></div>
   </div>
 
@@ -2288,7 +3266,7 @@
   <!-- PAGE: SAAS/IT -->
   <!-- ================================================================ -->
   <div class="page" id="page-saas">
-    <div class="page-hero">
+    <div class="page-hero" style="background-image: url(images/saas.jpg);">
       <div class="container">
         <span class="label">SaaS & IT Development</span>
         <div class="hero-tag">Multi-Tenant · API-First · Subscription Billing · AI-Ready</div>
@@ -2309,25 +3287,25 @@
           <h2 style="font-size:2.2rem;">SaaS & IT Solutions</h2>
         </div>
         <div class="grid-2" style="gap:1.5rem;">
-          <div class="card">
+          <div class="card" style="background-image: url(images/saass\ market.png);">
             <div class="feature-icon">📈</div>
             <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">SaaS Marketing Websites</h3>
             <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">High-conversion marketing sites that
               explain technical products to non-technical buyers and drive trial or demo conversion.</p>
           </div>
-          <div class="card">
+          <div class="card" style="background-image: url(images/custome.jpg);">
             <div class="feature-icon">🏗️</div>
             <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Custom SaaS Platforms</h3>
             <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Multi-tenant applications with subscription
               billing, RBAC, usage-based pricing, white-labeling, and API documentation.</p>
           </div>
-          <div class="card">
+          <div class="card" style="background-image: url(images/client.jpg);">
             <div class="feature-icon">📊</div>
             <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">Client Dashboards & Portals</h3>
             <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Customer-facing dashboards for data
               visualization, account management, and feature access — designed for SaaS-grade UX standards.</p>
           </div>
-          <div class="card">
+          <div class="card" style="background-image: url(images/Api-devel.jpg);">
             <div class="feature-icon">🔌</div>
             <h3 style="font-size:1.1rem;margin-bottom:0.6rem;">API Development & Integration</h3>
             <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">RESTful and GraphQL API design, third-party
@@ -2338,7 +3316,7 @@
     </section>
 
     <section class="section"
-      style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+      style="background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border); background-image: url(images/tech.webp);">
       <div class="container">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;">
           <div>
@@ -2426,15 +3404,36 @@
       </div>
     </section>
 
-    <div class="cta-section">
-      <div class="container" style="position:relative;z-index:1;">
-        <h2 style="font-size:2.5rem;margin-bottom:1rem;">Your Product Deserves Engineering That Matches Its Ambition
-        </h2>
-        <p style="color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 2rem;">Technical infrastructure decisions
-          today determine your ceiling in three years. Let us architect it correctly from the start.</p>
-        <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Discuss Your Product Roadmap →</a>
-      </div>
-    </div>
+   <section class="product-section">
+
+<div class="product-container">
+
+<!-- LEFT IMAGE -->
+
+<div class="product-image">
+<img src="./images/soft.png" alt="Software Engineering Team">
+</div>
+
+<!-- RIGHT CONTENT -->
+
+<div class="product-content">
+
+<h2>Your Product Deserves Engineering That Matches Its Ambition</h2>
+
+<p>
+Technical infrastructure decisions today determine your ceiling
+in three years. Let us architect it correctly from the start.
+</p>
+
+<a href="#" class="product-btn">
+Discuss Your Product Roadmap →
+</a>
+
+</div>
+
+</div>
+
+</section>
     <div id="saas-footer"></div>
   </div>
 
@@ -2442,7 +3441,7 @@
   <!-- PAGE: EDUCATION -->
   <!-- ================================================================ -->
   <div class="page" id="page-education">
-    <div class="page-hero">
+    <div class="page-hero" style="background-image: url(images/edic.jpg);">
       <div class="container">
         <span class="label">Education Platform Development</span>
         <div class="hero-tag">LMS · Student Portals · EdTech · Corporate L&D</div>
@@ -2464,37 +3463,37 @@
           <h2 style="font-size:2.2rem;">Education Institutions We Serve</h2>
         </div>
         <div class="grid-3">
-          <div class="card">
+          <div class="card card1">
             <div class="feature-icon">🏫</div>
             <h3 style="font-size:1rem;margin-bottom:0.4rem;">Schools & K-12</h3>
             <p style="font-size:0.84rem;color:var(--muted);">Admissions management, event systems, faculty profiles,
               parent communication portals.</p>
           </div>
-          <div class="card">
+          <div class="card card2">
             <div class="feature-icon">📚</div>
             <h3 style="font-size:1rem;margin-bottom:0.4rem;">Coaching Institutes</h3>
             <p style="font-size:0.84rem;color:var(--muted);">Course catalogs, batch management, live class scheduling,
               recorded content delivery.</p>
           </div>
-          <div class="card">
+          <div class="card card3">
             <div class="feature-icon">💻</div>
             <h3 style="font-size:1rem;margin-bottom:0.4rem;">EdTech Companies</h3>
             <p style="font-size:0.84rem;color:var(--muted);">Custom LMS platforms, course marketplaces, subscription
               learning, certification systems.</p>
           </div>
-          <div class="card">
+          <div class="card card4">
             <div class="feature-icon">🎓</div>
             <h3 style="font-size:1rem;margin-bottom:0.4rem;">Universities</h3>
             <p style="font-size:0.84rem;color:var(--muted);">Department management, admissions portals, student services
               integrations, research publication architecture.</p>
           </div>
-          <div class="card">
+          <div class="card card5">
             <div class="feature-icon">🏢</div>
             <h3 style="font-size:1rem;margin-bottom:0.4rem;">Corporate L&D</h3>
             <p style="font-size:0.84rem;color:var(--muted);">Employee onboarding, compliance training, certification
               tracking, skills development platforms.</p>
           </div>
-          <div class="card">
+          <div class="card card6">
             <div class="feature-icon">🌐</div>
             <h3 style="font-size:1rem;margin-bottom:0.4rem;">Online Course Creators</h3>
             <p style="font-size:0.84rem;color:var(--muted);">Own your platform. Eliminate per-student fees. Full control
@@ -2599,267 +3598,355 @@
       </div>
     </section>
 
-    <div class="cta-section">
-      <div class="container" style="position:relative;z-index:1;">
-        <h2 style="font-size:2.5rem;margin-bottom:1rem;">Build the Learning Platform Your Students Deserve</h2>
-        <p style="color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 2rem;">Stop paying per-student fees to
-          platforms you don't own. Build infrastructure that grows with you.</p>
-        <a class="btn btn-primary" href="mailto:team@collabifyspace.com">Request an Education Platform Consultation
-          →</a>
+        <div class="cta-section">
+
+      <div class="container cta-layout">
+
+        <!-- LEFT CONTENT -->
+        <div class="cta-text">
+          <h2>Build the Learning Platform Your Students Deserve</h2>
+
+          <p>
+            Stop paying per-student fees to platforms you don't own.
+            Build infrastructure that grows with you.
+          </p>
+          <br>
+          <a class="btn btn-primary" href="mailto:team@collabifyspace.com">
+            Request an Education Platform Consultation →
+          </a>
+        </div>
+
+        <!-- RIGHT IMAGE GALLERY -->
+          <div class="cta-gallery">
+
+            <div class="gallery-card">
+            <img src="./images/student.jpg">
+            </div>
+
+            <div class="gallery-card">
+            <img src="./images/learning.jpg">
+            </div>
+
+            <div class="gallery-card">
+            <img src="./images/student3.jpg">
+            </div>
+
+          </div>
+
       </div>
+
+      <script>
+
+        function expandCard(card){
+
+        document.querySelectorAll(".gallery-card").forEach(c=>{
+        c.classList.remove("active");
+        });
+
+        card.classList.add("active");
+
+        }
+
+      </script>
+
     </div>
     <div id="edu-footer"></div>
   </div>
 
   <!-- chatbot service -->
-  <section id="page-ai-chatbots" class="page service-page">
+  <section id="page-ai-chatbots" class="page service-page" >
 
-    <div class="service-hero">
-      <h1 class="highlight-heading">AI Chatbot Development & Integration</h1>
+        <section class="ai-hero-section">
 
-      <div class="highlight-pill">
+        <div class="ai-hero-content">
+
+        <h1 class="highlight-heading">
+        AI Chatbot Development & Integration
+        </h1>
+
+        <div class="highlight-pill">
         Website Chatbots · AI Assistants · Knowledge Bots · CRM Integration
-      </div>
-    </div>
+        </div>
 
-    <div class="service-content">
+        <h2>
+        AI Chatbots That Turn Website Visitors Into Qualified Leads
+        </h2>
 
-      <h2>AI Chatbots That Turn Website Visitors Into Qualified Leads</h2>
-
-      <p>
+        <p>
         Most businesses treat chatbots like a simple widget.
-        We build AI conversational systems integrated directly into your website and internal systems —
-        trained on your product catalog, documentation, support articles, and FAQs.
-      </p>
+        We build AI conversational systems integrated directly
+        into your website and internal systems.
+        </p>
 
-      <p>
-        Instead of generic responses, our AI chatbots understand your business context and can guide
-        customers through conversations naturally.
-      </p>
+        <a class="primary-btn" href="mailto:team@collabifyspace.com">
+        Start an AI Chatbot Project →
+        </a>
 
-      <!-- <a class="primary-btn">Start an AI Chatbot Project →</a> -->
-      <a class="primary-btn" href="mailto:team@collabifyspace.com">Start an AI Chatbot Project→</a>
+        </div>
 
+        </section>
 
       <!-- FEATURE CARDS -->
 
-      <h2>What Our AI Chatbots Can Do</h2>
+      <section class="ai-features-section">
+                <div class="container">
 
-      <div class="ai-grid">
+                  <h2>What Our AI Chatbots Can Do</h2>
 
+                  <div class="ai-grid">
 
-        <div class="ai-card">
-          <div class="ai-icon">
-            <i data-lucide="message-square"></i>
-          </div>
-          <h4>Conversational Customer Support</h4>
-          <p>
-            Answer customer questions instantly using product information,
-            documentation, and support knowledge bases.
-          </p>
-        </div>
+                    <!-- card 1 -->
+                    <div class="ai-card">
+                      <i data-lucide="message-square"></i>
+                      <h4>Conversational Customer Support</h4>
+                      <p>Answer customer questions instantly using knowledge bases.</p>
+                    </div>
 
-        <div class="ai-card">
+                    <!-- card 2 -->
+                    <div class="ai-card">
+                      <i data-lucide="user-check"></i>
+                      <h4>Lead Qualification</h4>
+                      <p>Collect company size, budget, and scope before routing leads.</p>
+                    </div>
 
-          <div class="ai-icon">
-            <i data-lucide="user-check"></i>
-          </div>
+                    <!-- card 3 -->
+                    <div class="ai-card">
+                      <i data-lucide="calendar"></i>
+                      <h4>Appointment Booking</h4>
+                      <p>Allow customers to book consultations automatically.</p>
+                    </div>
 
-          <h4>Lead Qualification</h4>
+                    <!-- card 4 -->
+                    <div class="ai-card">
+                      <i data-lucide="database"></i>
+                      <h4>CRM Integration</h4>
+                      <p>Push conversation data directly into CRM systems.</p>
+                    </div>
 
-          <p>
-            Automatically collect company size, project scope,
-            budget range, and timeline before routing leads.
-          </p>
+                    <!-- card 5 -->
+                    <div class="ai-card">
+                      <i data-lucide="globe"></i>
+                      <h4>Multi-Language Support</h4>
+                      <p>Respond naturally across multiple languages.</p>
+                    </div>
 
-        </div>
+                    <!-- card 6 -->
+                    <div class="ai-card">
+                      <i data-lucide="bar-chart"></i>
+                      <h4>Conversation Analytics</h4>
+                      <p>Track customer questions and product interest patterns.</p>
+                    </div>
 
-        <div class="ai-card">
-          <div class="ai-icon">
-            <i data-lucide="calendar"></i>
-          </div>
-          <h4>Appointment Booking</h4>
-          <p>
-            Allow customers to book consultations automatically through
-            integrated calendar scheduling systems.
-          </p>
-        </div>
+                  </div>
 
-        <div class="ai-card">
-          <div class="ai-icon">
-            <i data-lucide="database"></i>
-          </div>
-          <h4>CRM Integration</h4>
-          <p>
-            Automatically create contact records, store conversation
-            transcripts, and push data into CRM pipelines.
-          </p>
-        </div>
-
-        <div class="ai-card">
-          <div class="ai-icon">
-            <i data-lucide="globe"></i>
-          </div>
-          <h4>Multi-Language Support</h4>
-          <p>
-            Respond naturally across multiple languages without requiring
-            separate chatbot systems.
-          </p>
-        </div>
-
-        <div class="ai-card">
-          <div class="ai-icon">
-            <i data-lucide="bar-chart"></i>
-          </div>
-          <h4>Conversation Analytics</h4>
-          <p>
-            Track customer questions, product interest patterns, and
-            support bottlenecks through interaction analytics.
-          </p>
-        </div>
-
-      </div>
+                </div>
+       </section>
 
 
-      <!-- PROBLEM SECTION -->
+         <!-- PROBLEM SECTION -->
 
-      <h2>The Real Problem</h2>
+        <section class="problem-section">
 
-      <p>
-        Most chatbot tools installed on websites fail within weeks because
-        they are not trained on the company's actual business data.
-      </p>
+            <div class="container">
 
-      <div class="ai-grid">
+            <h2 class="section-title">The Real Problem</h2>
 
-        <div class="ai-card">
-          <h4>Generic Responses</h4>
-          <p>
-            Most bots rely on scripted flows and cannot understand real
-            customer questions.
-          </p>
-        </div>
+            <p class="section-sub">
+            Most chatbot tools fail because they are not trained on the company's real business data.
+            </p>
 
-        <div class="ai-card">
-          <h4>No Business Knowledge</h4>
-          <p>
-            Without access to company documentation or product data,
-            bots provide inaccurate responses.
-          </p>
-        </div>
+            <div class="problem-grid">
 
-        <div class="ai-card">
-          <h4>No CRM Integration</h4>
-          <p>
-            Many chatbot tools fail to connect with internal systems
-            or customer databases.
-          </p>
-        </div>
+            <div class="problem-card">
+            <div class="problem-icon">⚠️</div>
+            <h4>Generic Responses</h4>
+            <p>Most bots rely on scripted flows and cannot understand real customer questions.</p>
+            </div>
 
-        <div class="ai-card">
-          <h4>No Escalation</h4>
-          <p>
-            When bots cannot answer questions, they fail to route the
-            conversation to human teams.
-          </p>
-        </div>
+            <div class="problem-card">
+            <div class="problem-icon">📚</div>
+            <h4>No Business Knowledge</h4>
+            <p>Without access to company documentation or product data, bots provide inaccurate responses.</p>
+            </div>
 
-      </div>
+            <div class="problem-card highlight-card">
+            <div class="problem-icon">🔗</div>
+            <h4>No CRM Integration</h4>
+            <p>Many chatbot tools fail to connect with internal systems or customer databases.</p>
+            </div>
+
+            <div class="problem-card">
+            <div class="problem-icon">🚫</div>
+            <h4>No Escalation</h4>
+            <p>When bots cannot answer questions, they fail to route conversations to human teams.</p>
+            </div>
+
+            </div>
+
+            </div>
+
+        </section>
 
 
       <!-- TECHNOLOGY STACK -->
 
-      <h2>Technology Stack</h2>
+      <section class="tech-section">
 
-      <h3>LLM Infrastructure</h3>
-      <div class="tech-pills">
-        <span class="tech-pill">OpenAI GPT</span>
-        <span class="tech-pill">Anthropic Claude</span>
-        <span class="tech-pill">Mistral AI</span>
-      </div>
+            <div class="tech-overlay"></div>
 
-      <h3>Knowledge Retrieval</h3>
-      <div class="tech-pills">
-        <span class="tech-pill">Pinecone</span>
-        <span class="tech-pill">Weaviate</span>
-        <span class="tech-pill">LangChain</span>
-        <span class="tech-pill">LlamaIndex</span>
-      </div>
+            <div class="container tech-container">
 
-      <h3>Integration Layer</h3>
-      <div class="tech-pills">
-        <span class="tech-pill">Node.js APIs</span>
-        <span class="tech-pill">Webhook Architecture</span>
-        <span class="tech-pill">CRM Integrations</span>
-      </div>
+            <h2 class="tech-title">Technology Stack</h2>
+
+            <!-- CATEGORY BUTTONS -->
+
+            <div class="tech-tabs">
+
+            <button class="tech-tab active" onclick="showTech('llm')">
+            LLM Infrastructure
+            </button>
+
+            <button class="tech-tab" onclick="showTech('retrieval')">
+            Knowledge Retrieval
+            </button>
+
+            <button class="tech-tab" onclick="showTech('integration')">
+            Integration Layer
+            </button>
+
+            </div>
 
 
-      <!-- IMPLEMENTATION PROCESS -->
+            <!-- TECH ITEMS -->
 
-      <h2>Implementation Process</h2>
+            <div class="tech-content">
 
-      <div class="timeline">
+            <div id="llm" class="tech-group active">
 
-        <div class="timeline-item">
-          <h4>Week 1–2 — Discovery & Knowledge Mapping</h4>
-          <p>
-            Identify business data sources including documentation,
-            support articles, FAQs, and CRM data.
-          </p>
-        </div>
+            <span class="tech-pill">OpenAI GPT</span>
+            <span class="tech-pill">Anthropic Claude</span>
+            <span class="tech-pill">Mistral AI</span>
 
-        <div class="timeline-item">
-          <h4>Week 2–3 — Knowledge Base Setup</h4>
-          <p>
-            Content is converted into a structured knowledge system
-            used for AI retrieval.
-          </p>
-        </div>
+            </div>
 
-        <div class="timeline-item">
-          <h4>Week 3–5 — Chatbot Development</h4>
-          <p>
-            Conversation flows, integrations, and AI logic
-            are implemented.
-          </p>
-        </div>
 
-        <div class="timeline-item">
-          <h4>Week 5–6 — Testing & Optimization</h4>
-          <p>
-            Real-world queries are tested and responses refined.
-          </p>
-        </div>
+            <div id="retrieval" class="tech-group">
 
-        <div class="timeline-item">
-          <h4>Week 6 — Launch</h4>
-          <p>
-            Chatbot is deployed with conversation analytics enabled.
-          </p>
-        </div>
+            <span class="tech-pill">Pinecone</span>
+            <span class="tech-pill">Weaviate</span>
+            <span class="tech-pill">LangChain</span>
+            <span class="tech-pill">LlamaIndex</span>
 
-      </div>
+            </div>
+
+
+            <div id="integration" class="tech-group">
+
+            <span class="tech-pill">Node.js APIs</span>
+            <span class="tech-pill">Webhook Architecture</span>
+            <span class="tech-pill">CRM Integrations</span>
+
+            </div>
+
+            </div>
+
+            </div>
+
+      </section>
+
+
+            <script>
+                function showTech(type){
+
+                let groups = document.querySelectorAll(".tech-group");
+
+                let tabs = document.querySelectorAll(".tech-tab");
+
+                groups.forEach(g => g.classList.remove("active"));
+
+                tabs.forEach(t => t.classList.remove("active"));
+
+                document.getElementById(type).classList.add("active");
+
+                event.target.classList.add("active");
+
+                }
+            </script>
+
+
+    <!-- IMPLEMENTATION PROCESS -->
+
+     <section class="implementation-section">
+
+<div class="container">
+
+<h2 class="implementation-title">Implementation Process</h2>
+
+<div class="process-cards">
+
+<div class="process-card">
+<span class="week">Week 1–2</span>
+<h3>Discovery</h3>
+<p>Identify business data sources.</p>
+</div>
+
+<div class="process-card">
+<span class="week">Week 2–3</span>
+<h3>Knowledge Base Setup</h3>
+<p>Convert company content into structured knowledge.</p>
+</div>
+
+<div class="process-card">
+<span class="week">Week 3–5</span>
+<h3>Chatbot Development</h3>
+<p>Implement conversation flows and integrations.</p>
+</div>
+
+<div class="process-card">
+<span class="week">Week 5–6</span>
+<h3>Testing</h3>
+<p>Test real-world queries and optimize responses.</p>
+</div>
+
+<div class="process-card">
+<span class="week">Week 6</span>
+<h3>Launch</h3>
+<p>Deploy chatbot with analytics enabled.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
 
 
       <!-- CTA -->
 
-      <h2>Automate Your Website Conversations</h2>
+      <section class="ai-cta-section">
+        <div class="container">
 
-      <p>
-        If your team is manually responding to every inquiry,
-        an AI chatbot can handle a large portion of those
-        interactions automatically.
-      </p>
+          <h2>Automate Your Website Conversations</h2>
 
-      <a class="primary-btn" href="mailto:team@collabifyspace.com">Start an AI Chatbot Consultation →</a>
+          <p>
+            If your team is manually responding to inquiries,
+            an AI chatbot can handle them automatically.
+          </p>
 
+          <a class="primary-btn" href="mailto:team@collabifyspace.com">
+            Start an AI Chatbot Consultation →
+          </a>
 
-    </div>
+        </div>
+      </section>
 
   </section>
+
+
   <!-- Ai sales Assistant -->
   <section id="page-ai-sales-assistants" class="page service-page">
 
+    <section style="background-image: url(images/Ai-sales.webp); background-size:cover; background-position:center; border-radius:12px; padding:3rem;width: 100%;">
     <div class="service-hero">
       <h1 class="highlight-heading">AI Sales Assistant Development</h1>
 
@@ -2880,10 +3967,10 @@
       </p>
 
       <a class="primary-btn" href="mailto:team@collabifyspace.com">Start an AI Sales Assistant Project →</a>
-
+    </section>
 
       <!-- CORE CAPABILITIES -->
-
+    <section class="core-capabilities-section">
       <h2>Core Capabilities</h2>
 
       <div class="ai-grid">
@@ -2944,7 +4031,8 @@
         </div>
 
       </div>
-
+      </section>
+      <br>
 
       <!-- REAL PROBLEM -->
 
@@ -3904,46 +4992,53 @@
     </div>
 
   </section>
+
   <!-- who we are -->
 
-  <section id="page-whoweare" class="page service-page">
+  <section id="page-whoweare" class="page service-page" >
+ <section class="container" style="background-image: url(images/Ai.png);">
+  <div>
+      <div class="service-hero">
+        <h1 class="highlight-heading">
+          AI, Automation & Digital Solutions That Power Your Business Growth
+        </h1>
 
-    <div class="service-hero">
-      <h1 class="highlight-heading">
-        AI, Automation & Digital Solutions That Power Your Business Growth
-      </h1>
-
-      <div class="highlight-pill">
-        AI Agents · Automation Systems · SaaS Platforms · Digital Transformation
+        <div class="highlight-pill">
+          AI Agents · Automation Systems · SaaS Platforms · Digital Transformation
+        </div>
       </div>
-    </div>
 
-    <div class="service-content">
+      <div class="service-content">
 
-      <p>
-        CollabifySpace, based in India, delivers intelligent automation,
-        AI agents, and scalable IT platforms for E-Commerce, Real Estate,
-        Education, and IT/SaaS businesses worldwide.
-      </p>
+        <p>
+          CollabifySpace, based in India, delivers intelligent automation,
+          AI agents, and scalable IT platforms for E-Commerce, Real Estate,
+          Education, and IT/SaaS businesses worldwide.
+        </p>
 
-      <a class="primary-btn" href="mailto:team@collabifyspace.com">Start Your Project →</a>
+        <a class="primary-btn" href="mailto:team@collabifyspace.com">Start Your Project →</a>
 
 
-      <!-- ABOUT -->
+        <!-- ABOUT -->
 
-      <h2>Founded Where Innovation Meets India</h2>
+        <h2>Founded Where Innovation Meets India</h2>
 
-      <p>
-        CollabifySpace was founded in Andhra Pradesh, India in 2025 with a mission:
-        to empower businesses to leverage AI, automation, and modern digital platforms.
-      </p>
+        <p>
+          CollabifySpace was founded in Andhra Pradesh, India in 2025 with a mission:
+          to empower businesses to leverage AI, automation, and modern digital platforms.
+        </p>
 
-      <p>
-        Our goal is simple — create intelligent systems that work for you,
-        not the other way around. Since inception, we’ve focused on delivering
-        meaningful solutions for businesses ready to innovate and scale globally.
-      </p>
+        <p>
+          Our goal is simple — create intelligent systems that work for you,
+          not the other way around. Since inception, we’ve focused on delivering
+          meaningful solutions for businesses ready to innovate and scale globally.
+        </p>
+  </div>
+</section>
 
+
+
+<br>
 
       <!-- JOURNEY -->
 
@@ -4475,7 +5570,7 @@
   <!-- PAGE: CASE STUDIES -->
   <!-- ================================================================ -->
   <div class="page" id="page-casestudies">
-    <div class="page-hero">
+    <div class="page-hero" style="background-image: url(images/case-study.png); background-size: 100%;">
       <div class="container">
         <span class="label">Case Studies</span>
         <h1>Projects That Solve Real Business Problems</h1>
@@ -4489,7 +5584,7 @@
       <div class="container">
 
         <!-- CASE 1 -->
-        <div class="case-card" style="margin-bottom:2rem;">
+        <div class="case-card" style="margin-bottom:2rem; background-image: url(images/results.png);">
           <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center;">
             <span class="badge">E-Commerce</span>
             <span class="badge badge-teal">Multi-Region</span>
@@ -4529,7 +5624,7 @@
               <p style="font-size:0.88rem;color:rgba(255,255,255,0.65);margin-bottom:1.5rem;">18 weeks — Discovery →
                 Design → Development → QA → Launch</p>
 
-              <div class="case-result">
+              <div class="case-result" style="background-image: url(images/results.png);">
                 <div
                   style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">
                   Results</div>
@@ -4561,7 +5656,7 @@
         </div>
 
         <!-- CASE 2 -->
-        <div class="case-card" style="margin-bottom:2rem;">
+        <div class="case-card" style="margin-bottom:2rem; background-image: url(images/result2.png);">
           <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center;">
             <span class="badge">Real Estate</span>
             <span class="badge badge-teal">AI Integration</span>
@@ -4602,7 +5697,7 @@
               <p style="font-size:0.88rem;color:rgba(255,255,255,0.65);margin-bottom:1.5rem;">14 weeks from contract to
                 launch</p>
 
-              <div class="case-result">
+              <div class="case-result" style="background-image: url(images/results.png);"> 
                 <div
                   style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">
                   Results (First 90 Days)</div>
@@ -4634,7 +5729,7 @@
         </div>
 
         <!-- CASE 3 -->
-        <div class="case-card">
+        <div class="case-card" style="background-image: url(images/exam.png);">
           <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center;">
             <span class="badge">Education / EdTech</span>
             <span class="badge badge-teal">LMS Build</span>
@@ -4675,7 +5770,7 @@
               <p style="font-size:0.88rem;color:rgba(255,255,255,0.65);margin-bottom:1.5rem;">16 weeks from discovery to
                 launch</p>
 
-              <div class="case-result">
+              <div class="case-result" style="background-image: url(images/results.png);">
                 <div
                   style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">
                   Results</div>
