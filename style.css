@@ -811,3 +811,683 @@ box-shadow:0 20px 40px rgba(199,255,47,0.2);
 
                 /*Ai Sales Assistant*/
 
+.service-hero{
+
+width:100vw;
+min-height:75vh;
+
+background-image:url("images/Ai-sales.webp");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+display:flex;
+align-items:center;
+
+padding-left:8%;
+padding-right:8%;
+
+position:relative;
+
+/* this breaks out of container */
+margin-left:calc(50% - 50vw);
+margin-right:calc(50% - 50vw);
+
+}
+
+
+/* dark overlay */
+
+.service-hero::before{
+
+content:"";
+position:absolute;
+inset:0;
+
+background:linear-gradient(
+90deg,
+rgba(0,0,0,0.85) 0%,
+rgba(0,0,0,0.65) 45%,
+rgba(0,0,0,0.2) 100%
+);
+
+}
+
+
+/* content */
+
+.ai-hero-content{
+max-width:650px;
+position:relative;
+z-index:2;
+}
+
+
+/* heading */
+
+.highlight-heading{
+
+font-size:60px;
+color:#c7ff2f;
+margin-bottom:20px;
+font-weight:700;
+
+}
+
+
+/* pill */
+
+.highlight-pill{
+
+display:inline-block;
+border:2px solid #c7ff2f;
+padding:10px 22px;
+border-radius:40px;
+
+color:#c7ff2f;
+font-size:14px;
+
+margin-bottom:28px;
+
+}
+
+
+/* subtitle */
+
+.ai-hero-content h2{
+
+font-size:34px;
+margin-bottom:16px;
+
+}
+
+
+/* paragraph */
+
+.ai-hero-content p{
+
+color:rgba(255,255,255,0.75);
+line-height:1.7;
+margin-bottom:28px;
+
+}
+
+
+/* button */
+
+.primary-btn{
+
+background:#c7ff2f;
+color:#000;
+
+padding:14px 28px;
+border-radius:8px;
+
+font-weight:600;
+text-decoration:none;
+
+transition:0.3s;
+
+}
+
+.primary-btn:hover{
+transform:translateY(-3px);
+}
+body{
+  margin:0;
+  overflow-x:hidden;
+}
+.h1{
+  font-size:35px;
+  line-height:1.2;
+  max-width:500px;
+  font-style: italic;
+}
+
+                /* core capabilities */
+
+/* SECTION */
+
+.core-capabilities-section{
+  padding:80px 8%;
+  background:#050b17;
+}
+
+/* HEADING */
+
+.core-capabilities-section h2{
+  font-size:32px;
+  margin-bottom:40px;
+}
+
+/* GRID */
+
+.ai-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+}
+
+/* CARD */
+
+.ai-card{
+  background:linear-gradient(180deg,#0b1425,#081020);
+  border-radius:16px;
+  padding:30px;
+
+  border:1px solid rgba(255,255,255,0.06);
+
+  transition:0.3s;
+}
+
+/* HOVER EFFECT */
+
+.ai-card:hover{
+  border:1px solid #c7ff2f;
+  transform:translateY(-6px);
+}
+
+/* ICON */
+
+.ai-icon{
+  width:48px;
+  height:48px;
+
+  background:#c7ff2f;
+  color:#000;
+
+  border-radius:10px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  margin-bottom:20px;
+}
+
+/* TITLE */
+
+.ai-card h4{
+  font-size:18px;
+  margin-bottom:10px;
+  color:#c7ff2f;
+}
+
+/* TEXT */
+
+.ai-card p{
+  font-size:14px;
+  line-height:1.6;
+  color:rgba(255,255,255,0.7);
+}
+@media (max-width:1024px){
+
+.ai-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media (max-width:700px){
+
+.ai-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+
+        /*core capabilities section*/
+
+.core-capabilities-section{
+width:100%;
+padding:100px 8%;
+background:none;
+}
+
+/* heading */
+
+.core-capabilities-section h2{
+font-size:34px;
+margin-bottom:50px;
+}
+
+/* grid */
+
+.ai-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+max-width:1200px;
+margin:auto;
+}
+
+/* card */
+
+.ai-card{
+background:linear-gradient(180deg,#0b1425,#081020);
+padding:30px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,0.05);
+transition:0.3s;
+}
+
+.ai-card:hover{
+border:1px solid #c7ff2f;
+transform:translateY(-6px);
+}
+
+/* icon */
+
+.ai-icon{
+width:48px;
+height:48px;
+background:#c7ff2f;
+color:black;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+margin-bottom:18px;
+}
+
+/* title */
+
+.ai-card h4{
+color:#c7ff2f;
+margin-bottom:10px;
+font-size:18px;
+}
+
+/* text */
+
+.ai-card p{
+color:rgba(255,255,255,0.7);
+line-height:1.6;
+font-size:14px;
+}
+
+/* SECTION */
+
+.problem-section{
+padding:100px 8%;
+}
+
+/* TITLE */
+
+.problem-title{
+font-size:34px;
+margin-bottom:50px;
+}
+
+/* GRID */
+
+.problem-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:30px;
+max-width:1100px;
+}
+
+/* CARD */
+
+.problem-card{
+display:flex;
+align-items:center;
+gap:20px;
+
+background:linear-gradient(180deg,#0b1425,#081020);
+padding:25px;
+border-radius:16px;
+
+border:1px solid rgba(255,255,255,0.05);
+
+transition:0.3s;
+}
+
+/* hover */
+
+.problem-card:hover{
+border:1px solid #c7ff2f;
+transform:translateY(-4px);
+}
+
+/* IMAGE */
+
+.problem-card img{
+width:60px;
+height:60px;
+object-fit:contain;
+
+background:#c7ff2f;
+padding:12px;
+border-radius:12px;
+}
+
+/* TEXT */
+
+.problem-content h4{
+color:#c7ff2f;
+margin-bottom:6px;
+font-size:18px;
+}
+
+.problem-content p{
+color:rgba(255,255,255,0.7);
+font-size:14px;
+line-height:1.6;
+}
+
+        /*Technology Stack Section*/
+
+    .tech-section{
+padding:100px 8%;
+}
+
+.tech-title{
+font-size:36px;
+margin-bottom:50px;
+}
+
+/* 3 column layout */
+
+.tech-container{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:60px;
+max-width:1200px;
+}
+
+/* category */
+
+.tech-category h3{
+color:#c7ff2f;
+margin-bottom:20px;
+}
+
+/* stack items */
+
+.tech-grid{
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+/* pill style */
+
+.tech-card{
+display:flex;
+align-items:center;
+gap:10px;
+
+background:#0b1425;
+padding:12px 18px;
+
+border-radius:40px;
+
+border:1px solid rgba(255,255,255,0.05);
+
+transition:0.3s;
+}
+
+.tech-card:hover{
+border:1px solid #c7ff2f;
+}
+
+/* logo */
+
+.tech-card img{
+width:22px;
+height:22px;
+object-fit:contain;
+}
+
+        /*core voice Ai capabilities section*/
+
+/* grid layout */
+
+.ai-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+margin-top:40px;
+}
+
+/* card */
+
+.ai-card{
+
+background:linear-gradient(180deg,#0b1425,#081020);
+
+padding:32px;
+
+border-radius:16px;
+
+border:1px solid rgba(255,255,255,0.05);
+
+transition:all 0.35s ease;
+
+position:relative;
+
+}
+
+/* icon */
+
+.ai-icon{
+margin-bottom:18px;
+color:#c7ff2f;
+}
+
+/* heading */
+
+.ai-card h4{
+color:#c7ff2f;
+margin-bottom:12px;
+font-size:18px;
+}
+
+/* paragraph hidden initially */
+
+.ai-card p{
+
+color:rgba(255,255,255,0.6);
+
+opacity:0.5;
+
+transition:all 0.35s ease;
+
+}
+
+/* hover effect */
+
+.ai-card:hover{
+
+border:1px solid #c7ff2f;
+
+transform:translateY(-6px);
+
+box-shadow:0 0 25px rgba(199,255,47,0.15);
+
+}
+
+/* paragraph highlight only */
+
+.ai-card:hover p{
+
+opacity:1;
+
+color:#ffffff;
+
+transform:translateY(-2px);
+
+}
+
+
+            /*Ai Agentic solutions*/
+
+.voice-tech-section{
+padding:100px 8%;
+max-width:1200px;
+margin:auto;
+}
+
+.voice-tech-title{
+font-size:34px;
+margin-bottom:50px;
+}
+
+/* 4 column layout */
+
+.voice-tech-container{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:50px;
+}
+
+/* titles */
+
+.voice-tech-category h3{
+color:#c7ff2f;
+margin-bottom:20px;
+}
+
+/* stack list */
+
+.voice-tech-grid{
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+/* pill cards */
+
+.voice-tech-card{
+display:flex;
+align-items:center;
+gap:10px;
+
+background:#0b1425;
+padding:12px 18px;
+
+border-radius:40px;
+
+border:1px solid rgba(255,255,255,0.05);
+
+transition:0.3s;
+}
+
+.voice-tech-card:hover{
+border:1px solid #c7ff2f;
+transform:translateY(-2px);
+}
+
+.voice-tech-card img{
+width:22px;
+height:22px;
+object-fit:contain;
+}
+
+
+            /*Implementeation*/
+
+/* timeline container */
+
+.timeline{
+display:flex;
+flex-direction:column;
+gap:28px;
+margin-top:40px;
+max-width:700px;
+}
+
+/* timeline card */
+
+.timeline-item{
+
+background:linear-gradient(180deg,#0b1425,#081020);
+
+padding:28px 30px;
+
+border-radius:14px;
+
+border:1px solid rgba(255,255,255,0.05);
+
+transition:all 0.35s ease;
+
+cursor:pointer;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+/* heading */
+
+.timeline-item h4{
+color:#c7ff2f;
+margin-bottom:8px;
+}
+
+/* paragraph */
+
+.timeline-item p{
+color:rgba(255,255,255,0.7);
+transition:all 0.3s ease;
+}
+
+/* hover zoom */
+
+.timeline-item:hover{
+transform:scale(1.05);
+border:1px solid #c7ff2f;
+box-shadow:0 0 30px rgba(199,255,47,0.2);
+z-index:2;
+}
+
+/* other cards fade */
+
+.timeline:hover .timeline-item{
+opacity:0.5;
+}
+
+.timeline .timeline-item:hover{
+opacity:1;
+}
+
+/* AUDIO TEXT EFFECT */
+
+.timeline-item:hover p{
+animation:audioWave 1s infinite alternate;
+}
+
+/* wave animation */
+
+@keyframes audioWave{
+
+0%{
+letter-spacing:0px;
+transform:translateY(0px);
+}
+
+25%{
+letter-spacing:1px;
+transform:translateY(-1px);
+}
+
+50%{
+letter-spacing:2px;
+transform:translateY(0px);
+}
+
+75%{
+letter-spacing:1px;
+transform:translateY(1px);
+}
+
+100%{
+letter-spacing:0px;
+transform:translateY(0px);
+}
+
+}
